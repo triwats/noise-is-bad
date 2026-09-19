@@ -1,13 +1,18 @@
-<h1>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/brand/lockup-dark.svg">
-    <img alt="noise is bad." src="docs/brand/lockup-light.svg" height="96">
-  </picture>
-</h1>
+<div align="center">
 
-![One panel through a shipping incident: shipping degrades, then checkout, the basket and orders follow it down, while the rest of the shop carries on](demo/recording/noise-is-bad.gif)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/brand/lockup-dark.svg">
+  <img alt="noise is bad." src="docs/brand/lockup-light.svg" height="96">
+</picture>
 
-[Buy me a coffee](https://buymeacoffee.com/triwats) if this earns a place on your wall. Vendors: [sponsor noise is bad.](#support)
+<h3>when nothing is wrong, it plays the DVD screensaver.<br>
+when something is, the screen fills up with what broke.</h3>
+
+<p><em>how bad is it right now? look up. you will know before you have read a word.</em></p>
+
+<img alt="One panel through a shipping incident: shipping degrades, then checkout, the basket and orders follow it down, while the rest of the shop carries on" src="demo/recording/noise-is-bad.gif">
+
+</div>
 
 A Grafana panel for the office television. It answers one question from across the room:
 
