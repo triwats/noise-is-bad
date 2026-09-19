@@ -1,0 +1,8 @@
+global:
+  # Fast, because a demo should react while somebody is watching it.
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: pretend-estate
+    static_configs:
+      - targets: ['exporter:9101']

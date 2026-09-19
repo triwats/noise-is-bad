@@ -1,0 +1,478 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "live",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          },
+          "refId": "A",
+          "scenarioId": "raw_frame",
+          "rawFrameContent": "[\n  {\n    \"columns\": [\n      {\n        \"text\": \"service\",\n        \"type\": \"string\"\n      },\n      {\n        \"text\": \"availability\",\n        \"type\": \"number\"\n      }\n    ],\n    \"rows\": [\n      [\n        \"shipping\",\n        0.93\n      ],\n      [\n        \"checkout\",\n        0.985\n      ],\n      [\n        \"basket\",\n        1\n      ],\n      [\n        \"search\",\n        1\n      ]\n    ]\n  }\n]"
+        }
+      ],
+      "title": "noise is bad. live query",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "live",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          },
+          "refId": "A",
+          "scenarioId": "no_data_points"
+        }
+      ],
+      "title": "noise is bad. unreadable query",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "growing-incident",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. demo scenario",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "all-quiet",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. quiet mode",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 5,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "one-critical",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. one incident takes the screen",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "id": 6,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "major-incident",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. treemap",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 7,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "recovery",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. recovery",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "id": 8,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "chaos",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. chaos",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 32
+      },
+      "id": 9,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "text",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "all-quiet",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. quiet mode, wordmark",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 32
+      },
+      "id": 10,
+      "options": {
+        "demoScenario": "all-quiet",
+        "quietMode": true,
+        "quietMark": "3d",
+        "spinText": "noise is bad.",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. quiet mode, 3D text",
+      "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 11,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "live",
+        "maxBoxes": 12
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          },
+          "refId": "A",
+          "scenarioId": "raw_frame",
+          "rawFrameContent": "[\n  {\n    \"columns\": [\n      {\n        \"text\": \"service\",\n        \"type\": \"string\"\n      },\n      {\n        \"text\": \"availability\",\n        \"type\": \"number\"\n      }\n    ],\n    \"rows\": [\n      [\n        \"shipping\",\n        0.8675\n      ],\n      [\n        \"checkout\",\n        0.87\n      ],\n      [\n        \"basket\",\n        0.8725\n      ],\n      [\n        \"orders\",\n        0.875\n      ],\n      [\n        \"search\",\n        0.8775\n      ],\n      [\n        \"accounts\",\n        0.88\n      ],\n      [\n        \"reviews\",\n        0.8825\n      ],\n      [\n        \"payments\",\n        0.885\n      ],\n      [\n        \"invoices\",\n        0.8875\n      ],\n      [\n        \"refunds\",\n        0.89\n      ],\n      [\n        \"pricing\",\n        0.8925\n      ],\n      [\n        \"catalog\",\n        0.895\n      ],\n      [\n        \"images\",\n        0.8975\n      ],\n      [\n        \"email\",\n        0.9\n      ],\n      [\n        \"sms\",\n        0.9025\n      ],\n      [\n        \"loyalty\",\n        0.905\n      ],\n      [\n        \"wishlist\",\n        0.9075\n      ],\n      [\n        \"returns\",\n        0.91\n      ],\n      [\n        \"tax\",\n        0.9125\n      ],\n      [\n        \"fraud\",\n        0.915\n      ],\n      [\n        \"ledger\",\n        0.9175\n      ],\n      [\n        \"gateway\",\n        0.92\n      ],\n      [\n        \"sessions\",\n        0.9225\n      ],\n      [\n        \"stock\",\n        0.925\n      ],\n      [\n        \"labels\",\n        0.9275\n      ],\n      [\n        \"tracking\",\n        0.93\n      ],\n      [\n        \"coupons\",\n        0.9325\n      ],\n      [\n        \"rewards\",\n        0.935\n      ],\n      [\n        \"feeds\",\n        0.9375\n      ],\n      [\n        \"alerts\",\n        0.94\n      ]\n    ]\n  }\n]"
+        }
+      ],
+      "title": "noise is bad. thirty broken, twelve boxes",
+      "type": "triwats-noiseisbad-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "noise is bad. states",
+  "uid": "noise-is-bad-states",
+  "version": 1,
+  "weekStart": "",
+  "description": "One panel per state, for the end-to-end tests and for comparing behaviours side by side."
+}

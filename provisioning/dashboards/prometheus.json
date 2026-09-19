@@ -1,0 +1,72 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "graphTooltip": 0,
+  "id": 3,
+  "uid": "noise-is-bad-prometheus",
+  "title": "noise is bad. real data",
+  "description": "The same panel reading availability, good events over total events, which is what it expects out of the box. Break services by hand at http://localhost:9101.",
+  "links": [],
+  "panels": [
+    {
+      "type": "triwats-noiseisbad-panel",
+      "id": 1,
+      "title": "noise is bad. availability",
+      "gridPos": {
+        "h": 22,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "noise-is-bad-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "noise-is-bad-prometheus"
+          },
+          "expr": "demo_availability_ratio",
+          "legendFormat": "{{service}}",
+          "range": true
+        }
+      ],
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "live",
+        "maxBoxes": 20
+      }
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": [
+    "noise-is-bad"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "version": 1,
+  "weekStart": ""
+}

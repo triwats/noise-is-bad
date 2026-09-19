@@ -1,0 +1,31 @@
+services:
+  grafana:
+    extends:
+      file: .config/docker-compose-base.yaml
+      service: grafana
+    depends_on:
+      - prometheus
+
+  # A pretend estate that reports how each service is doing, with a web page at
+  # http://localhost:9101 for breaking things by hand.
+  exporter:
+    build: ./demo/exporter
+    container_name: noise-is-bad-exporter
+    ports:
+      - 9101:9101/tcp
+
+  # Scrapes the exporter every five seconds.
+  #
+  # If this container dies at startup with a bus error, Docker's virtual disk is
+  # full. Prometheus memory-maps a file before it serves anything, and that
+  # fails outright rather than reporting no space. `docker builder prune` is the
+  # cheapest way to get room back, because build cache costs only rebuild time.
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    container_name: noise-is-bad-prometheus
+    ports:
+      - 9090:9090/tcp
+    volumes:
+      - ./demo/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - exporter

@@ -1,0 +1,16 @@
+apiVersion: 1
+
+datasources:
+  - name: TestData DB
+    type: testdata
+    uid: trlxrdZVk
+    isDefault: true
+
+  # The pretend estate, scraped by Prometheus. Used by the "real data" dashboard.
+  - name: Prometheus
+    type: prometheus
+    uid: noise-is-bad-prometheus
+    access: proxy
+    url: http://prometheus:9090
+    jsonData:
+      timeInterval: 5s
