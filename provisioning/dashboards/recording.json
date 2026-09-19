@@ -7,7 +7,7 @@
   "id": 7,
   "uid": "noise-is-bad-recording",
   "title": "noise is bad. recording",
-  "description": "The panel tuned for the README recording: the lockup rather than the DVD logo, and boxes sized by severity alone.",
+  "description": "The panel tuned for the README recording: the lockup rather than the DVD logo, boxes sized by severity alone, and no transitions, which read as dropped frames in a GIF.",
   "links": [],
   "panels": [
     {
@@ -32,8 +32,8 @@
         "quietMode": true,
         "quietMark": "text",
         "usePersistence": false,
-        "transitionMs": 500,
-        "transitionStyle": "grow",
+        "transitionMs": 0,
+        "transitionStyle": "none",
         "demoScenario": "lifecycle",
         "maxBoxes": 20
       },

@@ -5,10 +5,10 @@
   <img alt="noise is bad." src="docs/brand/lockup-light.svg" height="96">
 </picture>
 
-<h3>when nothing is wrong, it plays the DVD screensaver.<br>
-when something is, the screen fills up with what broke.</h3>
+<h3>A Grafana panel plugin that shows you if shit has hit the fan immediately and clearly.</h3>
 
-<p><em>how bad is it right now? look up. you will know before you have read a word.</em></p>
+<p>See what is wrong, and act.<br>
+Built specifically to work on TVs and utilise maximum space.</p>
 
 <img alt="One panel through a shipping incident: shipping degrades, then checkout, the basket and orders follow it down, while the rest of the shop carries on" src="demo/recording/noise-is-bad.gif">
 
@@ -104,23 +104,32 @@ The rest of the panel options:
 | Most boxes on screen | The ceiling on boxes. The rest share one saying how many more. |
 | Demo | Run a built-in example instead of the query. |
 
-### When nothing is wrong
-
-An empty screen looks like a broken screen. So when everything is healthy, the panel runs a screensaver and you can see at a glance that it is still alive.
-
-| Quiet mark | What it does |
-| --- | --- |
-| **DVD logo** | Drifts and bounces off the edges, changing colour on every wall it hits. The default. Someone will eventually see it hit a corner. |
-| **Our logo** | The same bounce, calm, in the theme's colour. |
-| **3D text** | The Windows XP *3D Text* screensaver with our lockup: extruded, tumbling forever on all three axes in a black void, lit like early-2000s OpenGL. It is only readable now and then, every couple of minutes, as the original was. |
-
-`make quiet` opens the DVD logo fullscreen and `make spin` the 3D text.
-
-The DVD logo is a trademark of DVD Format/Logo Licensing Corporation. noise is bad. is not affiliated with or endorsed by them; the logo is a credited nod to the screensaver, not a licensed use. The outline was traced from [bouncingdvdlogo.com](https://bouncingdvdlogo.com). Full credits, including the typeface and libraries the panel ships, are in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
-
 A service that reads healthy stays on screen for two more checks before it goes, so a service flicking on and off does not make the screen flash. A service that disappears from the query entirely is kept, not cleared, because a metric going missing is not the same as a problem being fixed.
 
 Alerts work too, but are not the default. `ALERTS` is always 1 with the severity in a label, so there is no number to size a box by, and it turns this into an alert list rather than a picture of how bad things are. `docs/metrics.md` covers the workaround.
+
+## The fun bit
+
+An empty screen looks like a broken screen. So when nothing is wrong, the panel
+puts on a screensaver, and you can tell from across the room that it is still
+alive.
+
+<div align="center">
+  <img alt="The DVD logo drifting across the panel, changing colour every time it hits an edge" src="demo/recording/dvd-screensaver.gif">
+</div>
+
+Yes, it changes colour on every wall it hits. Yes, someone in your office will
+eventually see it hit a corner, and yes, they will tell everyone.
+
+| Screensaver | What you get |
+| --- | --- |
+| **DVD logo** | The one above. The default, obviously. |
+| **Our logo** | The same drift, calmer, in your theme's colour. |
+| **3D text** | The Windows XP *3D Text* screensaver rebuilt in CSS: our lockup extruded and tumbling on all three axes in a black void, lit like it is 2003. Readable every couple of minutes, exactly as annoying as the original. |
+
+`make quiet` opens the DVD logo fullscreen, `make spin` the 3D text.
+
+The DVD logo is a trademark of DVD Format/Logo Licensing Corporation. noise is bad. is not affiliated with or endorsed by them; it is a credited nod to the screensaver, not a licensed use. The outline was traced from [bouncingdvdlogo.com](https://bouncingdvdlogo.com). Full credits, including the typeface and libraries the panel ships, are in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 
 ## Developing
 
