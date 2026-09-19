@@ -1,0 +1,14 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",    "x": 0,    "y": 0,    "w": 880, "h": 560 },
+    { "file": "Marks.dc.html",   "x": 980,  "y": 0,    "w": 940, "h": 700 },
+    { "file": "Lockups.dc.html", "x": 0,    "y": 700,  "w": 880, "h": 620 },
+    { "file": "Sizes.dc.html",   "x": 980,  "y": 820,  "w": 940, "h": 760 },
+    { "file": "InPlace.dc.html", "x": 0,    "y": 1440, "w": 880, "h": 620 }
+  ],
+  "annotations": [
+    { "id": "pick-a-mark", "x": 980, "y": -150, "w": 500, "text": "Pick a mark from these six, then I'll cut it to src/img/logo.svg and wire it into plugin.json.\n\nAll six are fixed patterns, not random at runtime." },
+    { "id": "size-test", "x": 1980, "y": 820, "w": 380, "text": "This is the artboard that decides it. Grafana draws the logo at 24-40px, so whatever survives here wins." }
+  ],
+  "launch": { "view": "canvas" }
+}
