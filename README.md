@@ -30,13 +30,24 @@ FIXED           →  the box goes and the others take the space
 ALL FIXED       →  quiet again
 ```
 
-## Try it
+## Install
+
+Grafana 12.3 or newer. It is not on the Grafana catalogue yet, so you drop the
+files in yourself, which takes about two minutes.
+
+**[Install guide](docs/install.md)** · **[Getting started](docs/getting-started.md)**
+
+Short version: put the built plugin in Grafana's plugin directory, allow the
+unsigned plugin, restart. Then add a panel, set **Demo** to *Shipping Incident*,
+and watch it work before pointing it at anything real.
+
+## Or try the whole thing locally
 
 ```bash
 make setup
 ```
 
-That installs everything, builds the plugin, and starts Grafana, a pretend estate of seven services, and Prometheus scraping it. Then:
+You get Grafana, a pretend shop of seven services, and Prometheus scraping them. Then:
 
 | What | Where |
 | --- | --- |
@@ -47,19 +58,19 @@ That installs everything, builds the plugin, and starts Grafana, a pretend estat
 | Break services by hand | `make estate` |
 | Fullscreen, no Grafana furniture | `make tv` |
 
-The demo panel runs a shipping incident. Shipping starts missing its objective; checkout goes next because it cannot quote a delivery date, then the basket because it cannot show a total, then orders because they cannot be placed. Search, accounts and reviews never appear at all, because nothing is wrong with them. It takes two minutes and then everything is fixed.
+The demo runs a shipping incident. Shipping starts missing its objective, then checkout goes, because it cannot quote a delivery date without it. Then the basket, which cannot show a total. Then orders. Search, accounts and reviews never turn up at all, because nothing is wrong with them. Two minutes later everything is fixed and the screensaver comes back.
 
-The other dashboards read the same panel from real Prometheus data, one sized by error budget burned and one reading Sloth-shaped recording rules. All of them run the same code; only where the numbers come from differs.
+The other dashboards run the same panel against real Prometheus data, one sized by error budget and one reading Sloth's recording rules. Same code throughout; only the source of the numbers changes.
 
-There is no login. Run `make doctor` if something is not working.
+No login to worry about. If something looks off, `make doctor` will tell you what.
 
 ## Using it on your own data
 
-Give the panel an availability per service, where 1 is perfect and smaller is worse. Point it at the query, tell it which column or label holds the service name, and change nothing else.
+Give it one number per service: an availability, where 1 is perfect and smaller is worse. Tell it which column or label holds the name. That is the whole setup.
 
-Availability is good events over total events, the ordinary shape of an SLO and what most people already compute. Out of the box, below 99% is a warning and below 95% is critical.
+Availability is good events over total events, which is the shape most SLOs already come in. Straight out of the box, below 99% is a warning and below 95% is critical.
 
-Anything else you already have works too. Set the two levels in whatever units your query returns and say which way the number runs.
+Got something else? That works too. Set the two levels in whatever units your query returns, and say which way the number runs.
 
 | What you have | Worse when | Warning | Critical |
 | --- | --- | --- | --- |
@@ -71,11 +82,11 @@ Anything else you already have works too. Set the two levels in whatever units y
 
 The number matters, not just the threshold it crossed. A service at 90% availability gets visibly more screen than one at 94%.
 
-**Sloth and Pyrra work as they are.** For Sloth, query `1 - slo:sli_error:ratio_rate1h`, set the name to `sloth_service`, and you are finished; the defaults do the rest. The demo in this repository publishes metrics under exactly those names so you can see it working before touching your own.
+**Sloth and Pyrra work untouched.** For Sloth, query `1 - slo:sli_error:ratio_rate1h` and set the name to `sloth_service`. That is it, the defaults handle the rest. The demo here publishes metrics under exactly those names, so you can watch it work before going near your own.
 
-**One limit worth knowing before you wire it up.** The warning and critical levels apply to every service the query returns. If your services are held to different objectives, put each group on its own panel, or feed a number already normalised against each service's own objective. `docs/metrics.md` explains why, with worked numbers, and lists the few things only you can get right: units, direction, stable names and fresh data.
+**One catch, better heard now than later.** The warning and critical levels apply to every service in the query. If your services are held to different objectives, give each group its own panel, or feed the panel a number that is already normalised against each service's target. [The metrics guide](docs/metrics.md) works through it with real numbers, and lists the handful of things only you can get right.
 
-**[Full documentation, with example queries for Sloth, Pyrra and raw request counts, is in `docs/metrics.md`.](docs/metrics.md)**
+**[The metrics guide](docs/metrics.md)** has example queries for Sloth, Pyrra and plain request counts.
 
 The rest of the panel options:
 
@@ -95,7 +106,7 @@ The rest of the panel options:
 
 ### When nothing is wrong
 
-An empty screen looks like a broken screen. So when everything is healthy the panel runs a screensaver, and you can tell at a glance that it is still working.
+An empty screen looks like a broken screen. So when everything is healthy, the panel runs a screensaver and you can see at a glance that it is still alive.
 
 | Quiet mark | What it does |
 | --- | --- |
@@ -124,7 +135,7 @@ Run `make restart` after changing `src/plugin.json`. Do not edit anything in `.c
 
 ## How it is put together
 
-Four steps. Only the first knows Grafana exists, so the interesting parts could outlive the plugin.
+Four steps, and only the first one knows Grafana exists. The interesting parts could outlive the plugin.
 
 ```mermaid
 flowchart TD
@@ -147,7 +158,7 @@ flowchart TD
 
 ## Support
 
-noise is bad. is free and stays free. Two ways to keep it going:
+noise is bad. is free and stays that way. Two ways to keep it going:
 
 **If it is on your wall,** [buy me a coffee](https://buymeacoffee.com/triwats).
 
