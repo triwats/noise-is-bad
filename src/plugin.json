@@ -21,6 +21,18 @@
     },
     "links": [
       {
+        "name": "Source code",
+        "url": "https://github.com/triwats/noise-is-bad"
+      },
+      {
+        "name": "Documentation",
+        "url": "https://github.com/triwats/noise-is-bad/blob/main/docs/metrics.md"
+      },
+      {
+        "name": "Report an issue",
+        "url": "https://github.com/triwats/noise-is-bad/issues"
+      },
+      {
         "name": "Buy me a coffee",
         "url": "https://buymeacoffee.com/triwats"
       },
