@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "panel",
+  "name": "noise is bad.",
+  "id": "triwats-noiseisbad-panel",
+  "info": {
+    "keywords": [
+      "panel",
+      "noise",
+      "incident",
+      "status",
+      "wallboard"
+    ],
+    "description": "How bad are things right now? A panel for the office television that gets visually noisier as operational problems increase.",
+    "author": {
+      "name": "Triwats"
+    },
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Buy me a coffee",
+        "url": "https://buymeacoffee.com/triwats"
+      },
+      {
+        "name": "Sponsor",
+        "url": "https://github.com/sponsors/triwats"
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=12.3.0",
+    "plugins": []
+  }
+}
