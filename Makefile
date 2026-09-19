@@ -9,6 +9,7 @@ GRAFANA_URL := http://localhost:3000
 DASHBOARD_URL := $(GRAFANA_URL)/d/$(DASHBOARD)
 REAL_URL    := $(GRAFANA_URL)/d/noise-is-bad-prometheus
 SLOTH_URL   := $(GRAFANA_URL)/d/noise-is-bad-sloth
+REC_URL     := $(GRAFANA_URL)/d/noise-is-bad-recording
 MOTION_URL  := $(GRAFANA_URL)/d/noise-is-bad-transitions
 ESTATE_URL  := http://localhost:9101
 PROM_URL    := http://localhost:9090
@@ -24,7 +25,7 @@ HEALTH_TIMEOUT ?= 120
 
 .DEFAULT_GOAL := help
 .PHONY: help setup install playwright dev build up down restart logs shell \
-	open tv real sloth motion estate check typecheck lint lint-fix test e2e clean clean-all doctor
+	open tv real sloth motion recording estate check typecheck lint lint-fix test e2e clean clean-all doctor
 
 help: ## Show this help
 	@echo "noise is bad. — make targets"
@@ -91,6 +92,9 @@ estate: ## Open the page for breaking services by hand
 
 motion: ## Compare the four appear-and-disappear styles side by side
 	@open "$(MOTION_URL)?kiosk" 2>/dev/null || echo "$(MOTION_URL)?kiosk"
+
+recording: ## Open the panel as the README recording shows it
+	@open "$(REC_URL)?kiosk&viewPanel=1" 2>/dev/null || echo "$(REC_URL)?kiosk&viewPanel=1"
 
 sloth: ## Open the dashboard reading Sloth-shaped recording rules
 	@open "$(SLOTH_URL)?kiosk" 2>/dev/null || echo "$(SLOTH_URL)?kiosk"

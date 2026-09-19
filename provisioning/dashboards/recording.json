@@ -1,0 +1,70 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "graphTooltip": 0,
+  "id": 7,
+  "uid": "noise-is-bad-recording",
+  "title": "noise is bad. recording",
+  "description": "The panel tuned for the README recording: the lockup rather than the DVD logo, and boxes sized by severity alone.",
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 22,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "text",
+        "usePersistence": false,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "lifecycle",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad.",
+      "type": "triwats-noiseisbad-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "noise-is-bad"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "version": 1,
+  "weekStart": ""
+}
