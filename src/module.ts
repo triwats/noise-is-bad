@@ -88,7 +88,7 @@ export const plugin = new PanelPlugin<NoiseOptions>(NoisePanel).setPanelOptions(
     .addRadio({
       path: 'quietMark',
       name: 'Quiet mark',
-      description: 'What to bounce around the screen when nothing is wrong.',
+      description: 'What the screen shows when nothing is wrong.',
       category: ['Display'],
       defaultValue: DEFAULT_QUIET_MARK,
       settings: {
@@ -101,6 +101,7 @@ export const plugin = new PanelPlugin<NoiseOptions>(NoisePanel).setPanelOptions(
           },
           { value: 'text', label: 'Our logo' },
           { value: '3d', label: '3D text' },
+          { value: 'flip', label: 'Flip clock' },
         ],
       },
       showIf: (options) => options.quietMode,

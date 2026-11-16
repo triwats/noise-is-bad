@@ -4,6 +4,7 @@ import { css } from '@emotion/css';
 
 import { BouncingMark } from './BouncingMark';
 import { WORDMARK } from './brand';
+import { FlipClock } from './FlipClock';
 import { NoiseTheme } from './theme';
 import { ThreeDOptions, ThreeDText } from './ThreeDText';
 
@@ -13,7 +14,7 @@ import { ThreeDOptions, ThreeDText } from './ThreeDText';
  * `text` predates the brand and keeps its name so saved dashboards still load;
  * it now draws the lockup rather than plain text.
  */
-export type QuietMark = 'dvd' | 'text' | '3d';
+export type QuietMark = 'dvd' | 'text' | '3d' | 'flip';
 
 /** What the 3D text says when nobody has set anything. */
 export const DEFAULT_SPIN_TEXT = WORDMARK;
@@ -33,12 +34,14 @@ interface Props {
 /**
  * Quiet mode (NIB-004, NIB-005).
  *
- * What the screen shows when nothing is wrong. Two screensavers: a mark
- * bouncing off the edges, or Microsoft's 3D text turning in place.
+ * What the screen shows when nothing is wrong. Three screensavers: a mark
+ * bouncing off the edges, Microsoft's 3D text turning in place, or a flip clock
+ * telling the time.
  *
  * This component is only the choice between them and the box they sit in. The
- * motion lives in `BouncingMark` and `ThreeDText`, and the maths behind each is
- * pure and tested on its own in `bounce.ts` and `spin.ts`.
+ * motion lives in `BouncingMark`, `ThreeDText` and `FlipClock`, and the maths
+ * behind each is pure and tested on its own in `bounce.ts`, `spin.ts` and
+ * `flip.ts`.
  */
 export const QuietMode: React.FC<Props> = ({
   width,
@@ -48,14 +51,17 @@ export const QuietMode: React.FC<Props> = ({
   text = DEFAULT_SPIN_TEXT,
   threeD,
 }) => (
-  // The 3D text tumbles in a black void whatever Grafana's theme, as the
-  // screensaver did. The bouncing marks sit on the theme's own canvas.
+  // The 3D text and the flip clock sit in a black void whatever Grafana's
+  // theme, as the screensavers did. The bouncing marks sit on the theme's own
+  // canvas.
   <div
     className={styles.stage}
-    style={{ width, height, background: mark === '3d' ? VOID : theme.canvas }}
+    style={{ width, height, background: mark === '3d' || mark === 'flip' ? VOID : theme.canvas }}
     data-testid="quiet-mode"
   >
-    {mark === '3d' ? (
+    {mark === 'flip' ? (
+      <FlipClock width={width} height={height} />
+    ) : mark === '3d' ? (
       <ThreeDText text={text} width={width} height={height} {...threeD} />
     ) : (
       <BouncingMark width={width} height={height} theme={theme} mark={mark} />

@@ -77,6 +77,30 @@ test('turns the 3D text instead of bouncing a mark', async ({ gotoPanelEditPage,
   expect(await rotator.getAttribute('style')).not.toBe(before);
 });
 
+test('tells the time on a flip clock, and flips the minute over', async ({
+  gotoPanelEditPage,
+  readProvisionedDashboard,
+  page,
+}) => {
+  // The clock reads the browser's own time, so the browser is told what time it is.
+  await page.clock.install({ time: new Date(2026, 8, 20, 14, 7, 58) });
+
+  const dashboard = await readProvisionedDashboard(dashboardFile);
+  await gotoPanelEditPage({ dashboard, id: '12' });
+
+  const hours = page.locator('[data-card="hours"]');
+  const minutes = page.locator('[data-card="minutes"]');
+  await expect(hours).toHaveAttribute('data-value', '14');
+  await expect(minutes).toHaveAttribute('data-value', '07');
+  await expect(page.getByTestId('quiet-mark')).toBeHidden();
+
+  // Over the minute boundary: only the minutes card moves, and lands on 08.
+  await page.clock.runFor(2_500);
+  await expect(minutes).toHaveAttribute('data-value', '08');
+  await expect(hours).toHaveAttribute('data-value', '14');
+  await expect(hours).not.toHaveAttribute('data-flipping', 'true');
+});
+
 test('tumbles the 3D text on all three axes and keeps it on screen', async ({
   gotoPanelEditPage,
   readProvisionedDashboard,

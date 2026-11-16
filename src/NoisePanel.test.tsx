@@ -356,4 +356,11 @@ describe('settings reaching the drawing code', () => {
 
     expect(screen.getByText('noise is bad.')).toBeInTheDocument();
   });
+
+  it('passes the flip clock through', () => {
+    render(<NoisePanel {...inScenario('all-quiet', { quietMark: 'flip' })} />);
+
+    expect(screen.getByTestId('flip-clock')).toBeInTheDocument();
+    expect(screen.getAllByTestId('flip-card')).toHaveLength(2);
+  });
 });

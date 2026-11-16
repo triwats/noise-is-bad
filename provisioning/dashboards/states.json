@@ -456,6 +456,38 @@
       ],
       "title": "noise is bad. thirty broken, twelve boxes",
       "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 50
+      },
+      "id": 12,
+      "options": {
+        "demoScenario": "all-quiet",
+        "quietMode": true,
+        "quietMark": "flip",
+        "spinText": "noise is bad.",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. quiet mode, flip clock",
+      "type": "triwats-noiseisbad-panel"
     }
   ],
   "refresh": "",

@@ -11,7 +11,7 @@ The **DVD logo** quiet-mode screensaver draws the DVD Video logo.
 
 ## Archivo Black
 
-The 3D text screensaver embeds a Latin subset of the Archivo Black typeface.
+The 3D text and flip clock screensavers embed a Latin subset of the Archivo Black typeface.
 
 Copyright 2017 The Archivo Black Project Authors (<https://github.com/Omnibus-Type/ArchivoBlack>). Licensed under the SIL Open Font License, Version 1.1, reproduced in full below.
 

@@ -195,6 +195,30 @@ describe('QuietMode', () => {
     });
   });
 
+  describe('the flip clock', () => {
+    it('runs instead of the bouncing marks and the 3D text', () => {
+      render(<QuietMode width={800} height={600} theme={theme} mark="flip" />);
+
+      expect(screen.getByTestId('flip-clock')).toBeInTheDocument();
+      expect(screen.queryByTestId('three-d-text')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('quiet-mark')).not.toBeInTheDocument();
+    });
+
+    it('tells the time on two cards', () => {
+      jest.setSystemTime(new Date(2026, 8, 20, 14, 8));
+      render(<QuietMode width={800} height={600} theme={theme} mark="flip" />);
+
+      const cards = screen.getAllByTestId('flip-card');
+      expect(cards.map((c) => c.getAttribute('data-value'))).toEqual(['14', '08']);
+    });
+
+    it('sits in a black void whatever the theme, as the screensaver did', () => {
+      render(<QuietMode width={800} height={600} theme={{ ...theme, canvas: '#ffffff' }} mark="flip" />);
+
+      expect(screen.getByTestId('quiet-mode')).toHaveStyle({ background: '#000000' });
+    });
+  });
+
   describe('the DVD logo', () => {
     it('is what quiet mode shows by default', () => {
       render(<QuietMode width={800} height={600} theme={theme} />);

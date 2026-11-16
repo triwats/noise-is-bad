@@ -8,7 +8,7 @@ First release of **noise is bad.**, a Grafana panel for the office television.
 
 - **Nothing wrong** — the screen falls quiet and a mark drifts around it, either
   the DVD logo or the wordmark, or the Windows XP *3D Text* screensaver rebuilt
-  in CSS.
+  in CSS, or a split-flap clock telling the time.
 - **One problem** — it takes the entire screen: the name, how bad it is, nothing
   else.
 - **More than one** — a treemap, where each box is sized by how bad the problem
