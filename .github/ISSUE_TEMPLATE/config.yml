@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/triwats/noise-is-bad/security/advisories/new
+    about: Privately, please. Not as a public issue.
+  - name: What the panel expects to be fed
+    url: https://github.com/triwats/noise-is-bad/blob/main/docs/metrics.md
+    about: Most "the board stays quiet" reports are a threshold or direction question, answered here.
+  - name: Getting started
+    url: https://github.com/triwats/noise-is-bad/blob/main/docs/getting-started.md
+    about: From install to a board on the wall.

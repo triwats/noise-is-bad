@@ -1,0 +1,308 @@
+/* The brand is ink and paper; warning and critical are the only colours, as on the board itself. */
+
+@font-face {
+  font-family: 'Archivo Black';
+  src: url('media/archivo-black.woff2') format('woff2');
+  font-display: swap;
+}
+
+:root {
+  --ink: #0b0c0e;
+  --paper: #f2f1ed;
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --muted: #5a5a57;
+  --rule: #d6d4cd;
+  --panel: #e7e5de;
+  --warn: #c77800;
+  --crit: #c4162a;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--ink);
+    --fg: var(--paper);
+    --muted: #9a9a96;
+    --rule: #26272a;
+    --panel: #141517;
+    --warn: #ff9830;
+    --crit: #f2495c;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font:
+    18px/1.6 system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--warn);
+  outline-offset: 3px;
+}
+
+.top,
+main,
+footer {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.lockup img {
+  display: block;
+  width: auto;
+  height: 48px;
+}
+
+nav {
+  display: flex;
+  gap: 1.25rem;
+  font-weight: 600;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2 {
+  font-family: 'Archivo Black', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  margin: 0 0 0.5em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  max-width: 12ch;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+section {
+  padding: 56px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.hero {
+  border-top: 0;
+  padding-top: 32px;
+}
+
+.lede {
+  font-size: 1.25rem;
+  max-width: 38rem;
+  color: var(--muted);
+}
+
+p {
+  max-width: 42rem;
+}
+
+.small {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.screen {
+  margin: 32px 0 0;
+}
+
+.screen video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+  border-radius: 6px;
+  /* The bezel: the clip is a television, so draw it as one. */
+  box-shadow:
+    0 0 0 8px #000,
+    0 24px 48px -24px rgb(0 0 0 / 0.6);
+}
+
+.screen figcaption {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  max-width: 42rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 4px;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.button.quiet {
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 2px var(--fg);
+}
+
+.ladder {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.ladder li {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1rem;
+  padding: 14px 16px;
+  background: var(--bg);
+}
+
+.state {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.9rem;
+  padding-top: 0.15em;
+}
+
+.state.warn {
+  color: var(--warn);
+}
+
+.state.crit {
+  color: var(--crit);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.split .screen {
+  margin: 0;
+}
+
+.table {
+  overflow-x: auto;
+  margin: 24px 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 30rem;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+pre {
+  background: var(--panel);
+  padding: 16px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+footer {
+  padding-top: 32px;
+  padding-bottom: 48px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 720px) {
+  body {
+    font-size: 17px;
+  }
+
+  .lockup img {
+    height: 36px;
+  }
+
+  nav {
+    gap: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .ladder li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

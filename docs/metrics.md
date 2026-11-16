@@ -11,6 +11,10 @@ Availability is good events over total events, which is the ordinary shape of an
 SLO and what most people already compute. Out of the box, below 99% is a warning
 and below 95% is critical.
 
+Not sure whether a metric you have will work at all? Start with
+[What data works](what-works.md), which also walks through how the demo is
+wired.
+
 ## Other shapes
 
 The same panel reads anything else you already have. Set the two levels in

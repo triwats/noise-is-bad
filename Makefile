@@ -15,6 +15,7 @@ ESTATE_URL  := http://localhost:9101
 PROM_URL    := http://localhost:9090
 QUIET_URL   := $(GRAFANA_URL)/d/noise-is-bad-quiet?viewPanel=1&kiosk
 SPIN_URL    := $(GRAFANA_URL)/d/noise-is-bad-quiet?viewPanel=2&kiosk
+CLOCK_URL   := $(GRAFANA_URL)/d/noise-is-bad-quiet?viewPanel=3&kiosk
 
 # Extra flags for npm install. On a degraded network link, --maxsockets=3 stops
 # npm stalling on too many parallel connections.
@@ -25,7 +26,7 @@ HEALTH_TIMEOUT ?= 120
 
 .DEFAULT_GOAL := help
 .PHONY: help setup install playwright dev build up down restart logs shell \
-	open tv real sloth motion recording estate check typecheck lint lint-fix test e2e clean clean-all doctor
+	open tv quiet spin clock real sloth motion recording estate check typecheck lint lint-fix test e2e clean clean-all doctor site
 
 help: ## Show this help
 	@echo "noise is bad. — make targets"
@@ -53,6 +54,11 @@ playwright: ## Install the Chromium build used by the e2e tests
 	@npx playwright install chromium
 
 # --- building ----------------------------------------------------------------
+
+site: ## Build the project site into _site/ and serve it on port 8000
+	@./site/build.sh
+	@echo "Serving http://localhost:8000 (Ctrl-C to stop)"
+	@cd _site && python3 -m http.server 8000
 
 dev: ## Rebuild the plugin on every save (leave running)
 	@npm run dev
@@ -113,6 +119,9 @@ quiet: ## Open the quiet state full-screen: the DVD logo, bouncing
 
 spin: ## Open the quiet state full-screen: the 3D text, turning
 	@open "$(SPIN_URL)" 2>/dev/null || echo "$(SPIN_URL)"
+
+clock: ## Open the quiet state full-screen: the flip clock, telling the time
+	@open "$(CLOCK_URL)" 2>/dev/null || echo "$(CLOCK_URL)"
 
 # --- checks ------------------------------------------------------------------
 

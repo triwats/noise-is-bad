@@ -1,0 +1,32 @@
+name: An idea
+description: Something the board should do that it does not.
+labels: [idea]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **noise is bad.** answers one question from across a room: how bad are things right now?
+        Healthy things are never drawn, and anything nobody can read from ten metres away is working
+        against the point.
+
+        Some things are deliberately out of scope: alert lists, acknowledgement, notifications, history,
+        topology maps, per-service drill-down, and large configuration surfaces. An idea that pulls that
+        way may be declined because of what the project is for, not because it is a bad idea.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What happens today, and why it gets in the way. Describe the situation before the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you would like instead
+    validations:
+      required: true
+  - type: textarea
+    id: distance
+    attributes:
+      label: How it reads from across the room
+      description: Would someone ten metres away notice it without reading anything? If not, why is it still worth it?

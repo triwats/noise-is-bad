@@ -52,3 +52,6 @@ ci/
 
 # Packaged plugin builds produced by the sign/package step.
 *.zip
+
+# The assembled project site, built by site/build.sh.
+/_site/

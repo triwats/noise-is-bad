@@ -13,6 +13,11 @@ it. A proof of concept helps; a working exploit is not necessary.
 
 You should get a first response within a week. If you do not, please chase it.
 
+## Supported versions
+
+Only the latest release gets fixes. The plugin has no backend and nothing to
+migrate, so upgrading is the fix.
+
 ## What is in scope
 
 This is a Grafana panel plugin. It renders in the browser, alongside everything
@@ -39,3 +44,13 @@ beyond the panel options saved in a dashboard, and it reads no credentials.
 
 Everything the package bundles is listed in `THIRD_PARTY_NOTICES.md`, and a test
 fails if that file drifts from what is actually shipped.
+
+## What runs automatically
+
+- CodeQL scans the TypeScript and the GitHub workflows on every pull request and
+  weekly.
+- Dependency review fails a pull request that adds a dependency with a known
+  vulnerability of moderate severity or worse.
+- Dependabot proposes updates weekly, waiting five days after a release before
+  it does, so a compromised package has time to be caught upstream first.
+- Secret scanning and push protection are on for the repository.

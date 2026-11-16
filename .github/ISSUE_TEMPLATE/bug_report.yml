@@ -1,0 +1,57 @@
+name: Something is wrong
+description: The board shows the wrong thing, or nothing, or breaks.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. If the board is quiet when it should not be, check the warning level,
+        critical level and direction against [`docs/metrics.md`](https://github.com/triwats/noise-is-bad/blob/main/docs/metrics.md)
+        first: a threshold that can never be crossed is the commonest cause, and it looks exactly like a bug.
+  - type: textarea
+    id: saw
+    attributes:
+      label: What the screen showed
+      description: A screenshot or a short clip saves a round trip.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected it to show
+    validations:
+      required: true
+  - type: textarea
+    id: query
+    attributes:
+      label: The query and what it returns
+      description: |
+        The query, and a few rows of what it returns (the Table view or Query inspector is fine).
+        Replace any service names you would rather not share; the shape matters, not the names.
+      render: text
+  - type: textarea
+    id: options
+    attributes:
+      label: Panel options
+      description: Panel menu → Inspect → Panel JSON, the `options` block.
+      render: json
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: grafana-version
+    attributes:
+      label: Grafana version
+      placeholder: 13.1.0
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser, and what it runs on
+      description: Televisions and stick PCs run old or unusual browsers, so this matters more than usual.
+      placeholder: Chrome 140 on a Raspberry Pi 5

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>noise is bad.</title>
+    <meta
+      name="description"
+      content="A Grafana panel for the office television. It answers one question from across the room: how bad are things right now?"
+    />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="canonical" href="https://noiseisbad.triwats.com/" />
+    <link rel="icon" href="media/logo.svg" type="image/svg+xml" />
+    <meta property="og:title" content="noise is bad." />
+    <meta
+      property="og:description"
+      content="How bad are things right now? A Grafana panel for the office television."
+    />
+    <meta property="og:url" content="https://noiseisbad.triwats.com/" />
+    <meta property="og:image" content="https://noiseisbad.triwats.com/media/noise-is-bad.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="media/archivo-black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="lockup" href="./" aria-label="noise is bad., home">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="media/lockup-dark.svg" />
+          <img src="media/lockup-light.svg" alt="noise is bad." width="694" height="217" />
+        </picture>
+      </a>
+      <nav aria-label="Project">
+        <a href="https://github.com/triwats/noise-is-bad">Source</a>
+        <a href="https://github.com/triwats/noise-is-bad/blob/main/docs/getting-started.md">Docs</a>
+        <a href="#support">Support</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>How bad are things right&nbsp;now?</h1>
+        <p class="lede">
+          A Grafana panel for the office television. The screen gets noisier as more things break. Nothing healthy is
+          ever drawn, so you can tell how bad it is from across the room without reading a word.
+        </p>
+        <figure class="screen">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="media/noise-is-bad.png"
+            width="1000"
+            height="562"
+          >
+            <source src="media/noise-is-bad.webm" type="video/webm" />
+            <source src="media/noise-is-bad.mp4" type="video/mp4" />
+          </video>
+          <figcaption>
+            A shipping incident. Shipping degrades, then checkout, the basket and orders follow it down. Search,
+            accounts and reviews never appear, because nothing is wrong with them.
+          </figcaption>
+        </figure>
+        <p class="actions">
+          <a class="button" href="https://github.com/triwats/noise-is-bad/blob/main/docs/install.md">Install it</a>
+          <a class="button quiet" href="https://github.com/triwats/noise-is-bad">See the source</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Read it from ten metres</h2>
+        <p>The screen represents attention, not infrastructure. All of it goes to whatever deserves attention now.</p>
+        <ol class="ladder">
+          <li><span class="state">Nothing wrong</span><span>Quiet. A mark drifts around the screen.</span></li>
+          <li><span class="state warn">One problem</span><span>It takes the whole screen.</span></li>
+          <li><span class="state warn">Two problems</span><span>The screen splits.</span></li>
+          <li><span class="state crit">More</span><span>Boxes fill the screen, the worst problem biggest.</span></li>
+          <li><span class="state crit">Lasting longer</span><span>Its box grows and its colour strengthens.</span></li>
+          <li><span class="state">Fixed</span><span>The box goes and the others take the space.</span></li>
+        </ol>
+      </section>
+
+      <section class="split">
+        <div>
+          <h2>When nothing is wrong</h2>
+          <p>
+            The screen goes quiet and a screensaver takes over: the bouncing DVD logo, the Windows XP
+            <i>3D Text</i> rebuilt in CSS, or a split-flap clock. A calm screen means a calm estate. There is no wall of
+            green for anyone to learn to ignore.
+          </p>
+          <p class="small">
+            The DVD logo is a trademark of DVD Format/Logo Licensing Corporation. noise is bad. is not affiliated with
+            or endorsed by them.
+          </p>
+        </div>
+        <figure class="screen">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="media/dvd-screensaver.png"
+            width="700"
+            height="394"
+          >
+            <source src="media/dvd-screensaver.webm" type="video/webm" />
+            <source src="media/dvd-screensaver.mp4" type="video/mp4" />
+          </video>
+        </figure>
+      </section>
+
+      <section>
+        <h2>Feed it one number</h2>
+        <p>
+          One number per service and which label names it. Out of the box it expects availability, good events over
+          total events, which is the shape most SLOs already come in. Sloth and Pyrra recording rules work untouched.
+        </p>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <th>What you have</th>
+                <th>Worse when</th>
+                <th>Warning</th>
+                <th>Critical</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Availability, ratio</b></td>
+                <td>Lower</td>
+                <td>0.99</td>
+                <td>0.95</td>
+              </tr>
+              <tr>
+                <td>Error budget remaining</td>
+                <td>Lower</td>
+                <td>0.5</td>
+                <td>0.1</td>
+              </tr>
+              <tr>
+                <td>Error budget burned, %</td>
+                <td>Higher</td>
+                <td>50</td>
+                <td>90</td>
+              </tr>
+              <tr>
+                <td>Burn rate</td>
+                <td>Higher</td>
+                <td>6</td>
+                <td>14.4</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <a href="https://github.com/triwats/noise-is-bad/blob/main/docs/what-works.md">What data works</a> ·
+          <a href="https://github.com/triwats/noise-is-bad/blob/main/docs/metrics.md">What it expects, in full</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Install</h2>
+        <p>
+          Grafana 12.3 or newer. It is not in the Grafana catalogue yet, so the files go in by hand, which takes about
+          two minutes.
+        </p>
+        <pre><code>unzip triwats-noiseisbad-panel-*.zip -d /var/lib/grafana/plugins/</code></pre>
+        <p>
+          Allow the unsigned plugin, restart Grafana, add a panel and set <b>Demo</b> to <i>Shipping Incident</i> to
+          watch it work before pointing it at anything real.
+          <a href="https://github.com/triwats/noise-is-bad/blob/main/docs/install.md">The install guide</a> has every
+          step.
+        </p>
+      </section>
+
+      <section id="support">
+        <h2>Keep it going</h2>
+        <p>noise is bad. is free and stays that way.</p>
+        <p>
+          <b>If it is on your wall,</b> <a href="https://buymeacoffee.com/triwats">buy me a coffee</a>.<br />
+          <b>If you sell to the people who stare at wallboards,</b>
+          <a href="https://github.com/sponsors/triwats">sponsor it</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Made by <a href="https://triwats.com">Tristan Watson</a>. Apache-2.0.
+        <a href="https://github.com/triwats/noise-is-bad/blob/main/THIRD_PARTY_NOTICES.md">Credits</a>.
+      </p>
+    </footer>
+    <script>
+      // Respect a request for less motion: hold the clips still and hand the viewer the controls.
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        for (const v of document.querySelectorAll('video')) {
+          v.removeAttribute('autoplay');
+          v.pause();
+          v.controls = true;
+        }
+      }
+    </script>
+  </body>
+</html>

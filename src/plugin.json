@@ -21,6 +21,10 @@
     },
     "links": [
       {
+        "name": "Website",
+        "url": "https://noiseisbad.triwats.com"
+      },
+      {
         "name": "Source code",
         "url": "https://github.com/triwats/noise-is-bad"
       },

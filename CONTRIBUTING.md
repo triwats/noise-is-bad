@@ -67,7 +67,27 @@ full-screen.
 
 Small and focused is easier to take than large and sweeping. Say what you
 changed and why, and if it is a visual change, a screenshot or a clip saves
-everyone a round trip.
+everyone a round trip. The pull request template has a short checklist of the
+rules above; it exists because each of them has been broken at least once.
+
+**New panel options** need adding to every dashboard in
+`provisioning/dashboards/`. They are written by hand, so an option missing from
+one looks like an empty setting in the editor rather than an error.
+
+**Anything bundled** — a dependency, a font, an image — needs its notice in
+`THIRD_PARTY_NOTICES.md`.
+
+Commit messages are a plain sentence in the imperative, saying what the change
+does: `Add the flip clock mark`, not `feat: flip clock`. The body, if there is
+one, says why.
+
+User-visible changes go in `CHANGELOG.md` under the unreleased heading.
 
 Questions and disagreements are welcome in an issue before you build something
-large. It is cheaper than finding out afterwards.
+large. It is cheaper than finding out afterwards. For help using the panel
+rather than changing it, see [`SUPPORT.md`](SUPPORT.md).
+
+Security problems go through [`SECURITY.md`](SECURITY.md), never a public issue.
+
+Everyone taking part is expected to follow the
+[code of conduct](CODE_OF_CONDUCT.md).

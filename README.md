@@ -10,6 +10,8 @@
 <p>See what is wrong, and act.<br>
 Built specifically to work on TVs and utilise maximum space.</p>
 
+<p><a href="https://noiseisbad.triwats.com"><b>noiseisbad.triwats.com</b></a></p>
+
 <img alt="One panel through a shipping incident: shipping degrades, then checkout, the basket and orders follow it down, while the rest of the shop carries on" src="demo/recording/noise-is-bad.gif">
 
 </div>
@@ -35,7 +37,7 @@ ALL FIXED       →  quiet again
 Grafana 12.3 or newer. It is not on the Grafana catalogue yet, so you drop the
 files in yourself, which takes about two minutes.
 
-**[Install guide](docs/install.md)** · **[Getting started](docs/getting-started.md)**
+**[Install guide](docs/install.md)** · **[Getting started](docs/getting-started.md)** · **[What data works](docs/what-works.md)**
 
 Short version: put the built plugin in Grafana's plugin directory, allow the
 unsigned plugin, restart. Then add a panel, set **Demo** to *Shipping Incident*,
@@ -86,7 +88,7 @@ The number matters, not just the threshold it crossed. A service at 90% availabi
 
 **One catch, better heard now than later.** The warning and critical levels apply to every service in the query. If your services are held to different objectives, give each group its own panel, or feed the panel a number that is already normalised against each service's target. [The metrics guide](docs/metrics.md) works through it with real numbers, and lists the handful of things only you can get right.
 
-**[The metrics guide](docs/metrics.md)** has example queries for Sloth, Pyrra and plain request counts.
+**[What data works](docs/what-works.md)** says which metrics suit the panel and which do not, and walks through how the demo is wired. **[The metrics guide](docs/metrics.md)** has example queries for Sloth, Pyrra and plain request counts.
 
 The rest of the panel options:
 
@@ -126,8 +128,9 @@ eventually see it hit a corner, and yes, they will tell everyone.
 | **DVD logo** | The one above. The default, obviously. |
 | **Our logo** | The same drift, calmer, in your theme's colour. |
 | **3D text** | The Windows XP *3D Text* screensaver rebuilt in CSS: our lockup extruded and tumbling on all three axes in a black void, lit like it is 2003. Readable every couple of minutes, exactly as annoying as the original. |
+| **Flip clock** | The split-flap clock, as the Fliqlo screensaver draws it: hours and minutes on two cards, and once a minute a leaf falls. Twenty-four hours, the television's own time, nothing to set. |
 
-`make quiet` opens the DVD logo fullscreen, `make spin` the 3D text.
+`make quiet` opens the DVD logo fullscreen, `make spin` the 3D text, `make clock` the flip clock.
 
 The DVD logo is a trademark of DVD Format/Logo Licensing Corporation. noise is bad. is not affiliated with or endorsed by them; it is a credited nod to the screensaver, not a licensed use. The outline was traced from [bouncingdvdlogo.com](https://bouncingdvdlogo.com). Full credits, including the typeface and libraries the panel ships, are in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 

@@ -42,6 +42,9 @@ Got error budgets, burn rate, or a plain status number instead? All fine. Set
 the two levels in whatever units your query returns and say which way the
 number runs. [The metrics guide](metrics.md) has a table for each.
 
+Not sure your metric will work? [What data works](what-works.md) has a
+three-question test and a list of the usual suspects.
+
 ## Put it on the wall
 
 Make the panel the only thing on its dashboard, then open it with `?kiosk` on
@@ -80,6 +83,8 @@ you can turn it off with **Grow with age**.
 
 ## Going deeper
 
+- [What data works](what-works.md) — which metrics suit the panel, which do not, and
+  how the demo in the repository is wired end to end.
 - [The metrics guide](metrics.md) — every input shape, what the panel does with
   a number, and the handful of things only you can get right.
 - [Install](install.md) — if you are setting this up somewhere new.
