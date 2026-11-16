@@ -28,3 +28,10 @@ passing it from the panel. Every board silently used the default, and the tests 
 
 **Rule:** a panel option needs a test at the panel level proving the setting reaches the drawing code. Remove
 the wiring, watch the test fail, put it back.
+
+## When asked to repeat a question, repeat it
+
+**Mistake:** the user rejected a question dialog and said "ask me again"; I replied "No response requested" and
+did nothing.
+
+**Rule:** "ask me again" means ask the same question again, straight away, reworded if that helps.

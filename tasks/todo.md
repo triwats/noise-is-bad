@@ -801,3 +801,85 @@ a ratio.
 
 Out of scope, deliberately: burn rate, error budgets, multi-window alerting. One instant value per service,
 one objective.
+
+## Project site at noiseisbad.triwats.com
+
+**Goal:** a one-page home for noise is bad., served by GitHub Pages from this repository, on a subdomain of
+triwats.com. The repository stays under `triwats`; no organisation, no rebrand. The name stays `noise is bad.`;
+`noiseisbad` is only the address.
+
+- [x] `site/index.html`: static, no build step, no framework. The demo clip on top (the README convention: the
+      demo is the pitch), one line on what it is, install, the three states, links to source, docs and sponsor
+- [x] Brand from the existing outputs only: `docs/brand/lockup-*.svg`, `src/img/logo.svg`, the embedded Archivo Black
+      from `src/render/brandData.ts`. Nothing hand-copied that `generate.py` owns
+- [x] Demo clips re-encoded to MP4/WebM for the page (the GIFs are 6–8 MB each); GIFs stay for the README
+- [x] `site/CNAME` containing `noiseisbad.triwats.com`
+- [x] `.github/workflows/pages.yml`: deploy `site/` on push to main when `site/**` changes, least-privilege permissions
+- [x] Enable Pages with the Actions source (`gh api`, needs the go-ahead)
+- [ ] DNS in Cloudflare: `CNAME noiseisbad → triwats.github.io`, **DNS only (grey cloud)** so GitHub can issue the
+      certificate. Done by hand in the Cloudflare dashboard, or by me with an API token
+- [ ] Verify the domain on the triwats account so nobody else can claim the subdomain on Pages
+- [ ] Enforce HTTPS once the certificate is issued
+- [x] Add the site as the homepage: repo settings, `src/plugin.json` links, README
+- [ ] Verify: the page loads over HTTPS at the subdomain, renders in light and dark, works at phone width, and the
+      clips play
+
+### Review
+
+Built and checked locally; not yet live, because DNS and the push are outstanding.
+
+| Check | Result |
+| --- | --- |
+| Page at 1280 and 390 wide, light and dark | renders, no horizontal scroll |
+| Archivo Black | loads from the extracted subset |
+| Clips | 14 MB of GIF became 1.5 MB of MP4 and WebM; the hero clip plays |
+| `make check` | 420/420 pass after the `plugin.json` link |
+| Pages | enabled, Actions source, custom domain `noiseisbad.triwats.com` |
+
+Wrangler has no DNS commands, so the Cloudflare record is by hand or through the API with a scoped token.
+
+## Docs — what data works
+
+**Goal:** one page answering "will my metric work?", and showing exactly how the demo is wired so it can be copied.
+
+- [x] `docs/what-works.md`: a three-question test, a works / does not work table with the fix for each, the demo
+      chain step by step (exporter, Prometheus, data source, panel settings, breaking things by hand), and moving it
+      to your own data
+- [x] Linked from the README, getting started, the metrics guide and the site
+- [x] Every relative link and anchor checked
+- [ ] Screenshots of the panel editor and the exporter's control page, once the stack is up and after the TV test
+
+## Release — package for the Grafana catalog
+
+**Goal:** a v1.0.0 that passes Grafana's validator cleanly and can be submitted for review.
+
+Starting point (validator, 2026-11-10): 0 errors, 4 warnings: no screenshots, `LICENSE` template text, website link
+unresolved, unsigned (expected until review accepts it).
+
+- [ ] Commit the outstanding work (flip clock, site, community files, docs) in coherent commits
+- [ ] `LICENSE`: fill the copyright line
+- [ ] Screenshots in `src/img/` (quiet, single incident, treemap, overflow) captured from the provisioned dashboards,
+      listed in `plugin.json`
+- [ ] Catalog README (`src/README.md`): what to query, the default availability levels, options, Sloth/Pyrra, a GIF
+      by absolute URL. It is the plugin's page on grafana.com
+- [ ] Grafana floor stays `>=12.3.0` (decided)
+- [ ] `release.yml`: signing via `policy_token` (left inert until the secret exists) and build provenance attestation
+- [ ] Site live first, so the Website link resolves (DNS items in the Pages section above)
+- [ ] CHANGELOG dated at tag time
+- [ ] Verify: validator shows only the unsigned warning; `make check` and `make e2e` pass
+- [ ] Hand-off: tag `v1.0.0`, submit on grafana.com, then token → secret → signed re-release
+
+## Live demo — real Grafana on a VPS
+
+**Goal:** a public, read-only Grafana running the panel, linked from the site, safe to leave alone for months.
+
+- [ ] `deploy/`: production compose: Caddy (automatic TLS) in front, Grafana pinned, Prometheus, the demo exporter.
+      Only 80/443 exposed; Prometheus and the exporter's control page stay internal, or anyone could break the demo
+- [ ] Grafana locked down: anonymous Viewer only, login form and basic auth off, sign-up off, unsigned loading allowed
+      for this plugin id alone, demo dashboard as home, kiosk URL
+- [ ] Plugin installed from the GitHub release zip, so the demo runs exactly what users download
+- [ ] Prometheus retention short (a day); restart policies; resource use measured to size the VPS
+- [ ] `deploy/README.md` runbook: create the VPS, SSH keys only, firewall, unattended upgrades, DNS, first deploy,
+      updating
+- [ ] Verify locally with the production compose before any VPS exists
+- [ ] Link it from the site and README
