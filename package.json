@@ -1,6 +1,6 @@
 {
   "name": "noise-is-bad",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "scripts": {
     "build": "webpack -c ./webpack.config.ts --env production",
     "dev": "webpack -w -c ./webpack.config.ts --env development",
@@ -18,7 +18,7 @@
   "devDependencies": {
     "@grafana/eslint-config": "^9.0.0",
     "@grafana/plugin-e2e": "^3.11.0",
-    "@grafana/sign-plugin": "^3.3.3",
+    "@grafana/sign-plugin": "^4.0.0",
     "@grafana/tsconfig": "^2.2.0",
     "@playwright/test": "^1.62.1",
     "@stylistic/eslint-plugin-ts": "^4.4.0",
