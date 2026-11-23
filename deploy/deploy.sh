@@ -3,8 +3,8 @@
 # repository and restarts the stack, then the site is checked from outside.
 #
 #   deploy/deploy.sh                    # deploy the current commit
-#   deploy/deploy.sh v1.0.1             # deploy a tag or any pushed ref
-#   deploy/deploy.sh --plugin 1.0.1     # also switch the panel release
+#   deploy/deploy.sh v0.0.2             # deploy a tag or any pushed ref
+#   deploy/deploy.sh --plugin 0.0.2     # also switch the panel release
 #
 # Nothing about the server lives in this repository, which is public. The
 # script connects to an SSH alias, `noiseisbad-demo` unless DEPLOY_HOST says
@@ -28,7 +28,7 @@ ref=HEAD
 plugin=""
 while [ $# -gt 0 ]; do
   case "$1" in
-    --plugin) plugin="${2:?--plugin needs a version, e.g. 1.0.1}"; shift 2 ;;
+    --plugin) plugin="${2:?--plugin needs a version, e.g. 0.0.2}"; shift 2 ;;
     -h|--help) sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     -*) echo "unknown option: $1" >&2; exit 2 ;;
     *) ref="$1"; shift ;;

@@ -62,7 +62,7 @@ services:
     restart: 'no'
     command: ['sh', '/fetch-plugin.sh']
     environment:
-      PLUGIN_VERSION: ${PLUGIN_VERSION:-1.0.0}
+      PLUGIN_VERSION: ${PLUGIN_VERSION:-0.0.1}
       PLUGIN_URL: ${PLUGIN_URL:-}
       PLUGIN_SHA256: ${PLUGIN_SHA256:-}
     volumes:

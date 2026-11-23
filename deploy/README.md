@@ -108,8 +108,8 @@ Then, from the repository root:
 
 ```bash
 deploy/deploy.sh                   # the current commit, which must be pushed
-deploy/deploy.sh v1.0.1            # a tag or any pushed ref
-deploy/deploy.sh --plugin 1.0.1    # also switch the panel release
+deploy/deploy.sh v0.0.2            # a tag or any pushed ref
+deploy/deploy.sh --plugin 0.0.2    # also switch the panel release
 ```
 
 The server checks out that exact commit from GitHub, so nothing uncommitted on your laptop ever ships. It then rebuilds, restarts Grafana and runs `check.sh` against the live site. Once SSH has moved onto Tailscale, point the alias's `HostName` at the server's Tailscale name. The server's settings stay in `deploy/.env` on the server, which git ignores; the first deploy creates it from `.env.example`. `DEPLOY_HOST`, `DEPLOY_DIR` and `DEPLOY_URL` override the alias, the checkout directory and the address.
@@ -142,7 +142,7 @@ When a new release is tagged on GitHub:
 
 ```bash
 cd ~/noise-is-bad/deploy
-nano .env                         # PLUGIN_VERSION=1.0.1 (and PLUGIN_SHA256 if you use it)
+nano .env                         # PLUGIN_VERSION=0.0.2 (and PLUGIN_SHA256 if you use it)
 docker compose up -d              # downloads the new zip once
 docker compose restart grafana    # Grafana reads plugins only at start
 ./check.sh
