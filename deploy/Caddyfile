@@ -1,0 +1,37 @@
+# noise is bad. public demo: the only thing on the box that listens publicly.
+# Caddy gets and renews the certificate for {$DOMAIN} by itself.
+{
+	# Optional: an address Let's Encrypt can warn about expiring certificates.
+	email {$ACME_EMAIL:}
+}
+
+{$DOMAIN:demo.noiseisbad.triwats.com} {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+		Cross-Origin-Opener-Policy "same-origin"
+		-Server
+		-Via
+	}
+
+	# The front door is the demo, full screen, as a television would show it.
+	redir / /d/a538aeff-5a8a-42a5-901c-938d896fdd6f/noise-is-bad?viewPanel=1&kiosk 302
+
+	# Grafana pages a viewer has no business on. Grafana already refuses the
+	# actions behind most of them; this keeps the pages themselves out of reach.
+	@pages path /login* /signup* /user/* /profile* /explore* /drilldown* /admin* /org* /connections* /datasources* /plugins* /a/* /alerting* /dashboard/new* /dashboard/import* /dashboard/snapshots* /library-panels* /playlists* /swagger* /openapi*
+	redir @pages / 302
+
+	# API surface the panel never needs: the plugin list, the raw datasource
+	# proxy, the grafana.com proxy, snapshots, admin, and Grafana's own metrics.
+	@api {
+		path /api/plugins /api/datasources /api/datasources/proxy/* /api/gnet/* /api/snapshots* /api/snapshot/* /api/admin/* /api/playlists* /api/live/* /metrics /metrics/*
+	}
+	respond @api 404
+
+	reverse_proxy grafana:3000
+}

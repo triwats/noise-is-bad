@@ -55,3 +55,18 @@ ci/
 
 # The assembled project site, built by site/build.sh.
 /_site/
+
+# The demo server's settings live only on the server.
+/deploy/.env
+/deploy/.env.*
+!/deploy/.env.example
+
+# Secrets never belong in this public repository, wherever they land.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+id_rsa*
+id_ed25519*

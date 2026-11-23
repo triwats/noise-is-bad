@@ -1,6 +1,6 @@
 {
   "name": "noise-is-bad",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "scripts": {
     "build": "webpack -c ./webpack.config.ts --env production",
     "dev": "webpack -w -c ./webpack.config.ts --env development",

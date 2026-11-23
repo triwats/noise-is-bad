@@ -1,18 +1,26 @@
-# This GitHub Action automates the process of building Grafana plugins.
-# (For more information, see https://github.com/grafana/plugin-actions/blob/main/build-plugin/README.md)
+# Builds the plugin on a version tag and attaches the zip to a GitHub release.
+# (See https://github.com/grafana/plugin-actions/blob/main/build-plugin/README.md)
+#
+# Signing: leave GRAFANA_ACCESS_POLICY_TOKEN unset until Grafana's catalog review
+# accepts the plugin. Until then the release ships unsigned, which is what the
+# submission expects. Once accepted, create an access policy token with the
+# plugins:write scope on grafana.com, save it as that repository secret, and tag
+# again: the next release is signed with no change here.
 name: Release
 
 on:
   push:
     tags:
-      - 'v*' # Run workflow on version tags, e.g. v1.0.0.
+      - 'v*' # e.g. v1.0.0
 
 permissions: read-all
 
 jobs:
   release:
     permissions:
-      contents: write
+      contents: write # create the release
+      id-token: write # build provenance attestation
+      attestations: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -20,10 +28,7 @@ jobs:
           persist-credentials: false
 
       - uses: grafana/plugin-actions/build-plugin@build-plugin/v1.2.0
-        # Uncomment to enable plugin signing
-        # (For more info on how to generate the access policy token see https://grafana.com/developers/plugin-tools/publish-a-plugin/sign-a-plugin#generate-an-access-policy-token)
-        #with:
-        # Make sure to save the token in your repository secrets
-        #policy_token: $
-        # Usage of GRAFANA_API_KEY is deprecated, prefer `policy_token` option above
-        #grafana_token: $
+        with:
+          node-version: '24'
+          policy_token: ${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
+          attestation: true
