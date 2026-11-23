@@ -83,10 +83,15 @@ test('tells the time on a flip clock, and flips the minute over', async ({
   page,
 }) => {
   // The clock reads the browser's own time, so the browser is told what time it is.
-  await page.clock.install({ time: new Date(2026, 8, 20, 14, 7, 58) });
+  // It starts well before the minute and is paused two seconds short of it once
+  // the panel is up: however slowly Grafana loads, the minute cannot turn over
+  // before the test is looking.
+  await page.clock.install({ time: new Date(2026, 8, 20, 14, 7, 0) });
 
   const dashboard = await readProvisionedDashboard(dashboardFile);
   await gotoPanelEditPage({ dashboard, id: '12' });
+  await expect(page.locator('[data-card="minutes"]')).toBeVisible();
+  await page.clock.pauseAt(new Date(2026, 8, 20, 14, 7, 58));
 
   const hours = page.locator('[data-card="hours"]');
   const minutes = page.locator('[data-card="minutes"]');
