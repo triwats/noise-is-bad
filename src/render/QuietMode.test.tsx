@@ -219,6 +219,61 @@ describe('QuietMode', () => {
     });
   });
 
+  describe('the Boing ball', () => {
+    const ball = () => screen.getByTestId('boing-ball');
+    const sheet = () => screen.getByTestId('boing-sheet');
+
+    it('runs instead of every other mark', () => {
+      render(<QuietMode width={800} height={600} theme={theme} mark="boing" />);
+
+      expect(screen.getByTestId('boing')).toBeInTheDocument();
+      expect(screen.queryByTestId('quiet-mark')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('flip-clock')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('three-d-text')).not.toBeInTheDocument();
+    });
+
+    it('sits in its grey room with the grid behind it, whatever the theme', () => {
+      render(<QuietMode width={800} height={600} theme={{ ...theme, canvas: '#ffffff' }} mark="boing" />);
+
+      expect(screen.getByTestId('quiet-mode')).toHaveStyle({ background: '#aaaaaa' });
+      expect(document.querySelectorAll('[data-testid="boing"] line').length).toBeGreaterThan(40);
+    });
+
+    it('bounces, casts a shadow, and spins', () => {
+      render(<QuietMode width={800} height={600} theme={theme} mark="boing" />);
+
+      jest.advanceTimersByTime(300);
+      const first = { ball: ball().style.transform, sheet: sheet().style.transform };
+      expect(first.ball).toMatch(/translate3d/);
+      expect(screen.getByTestId('boing-shadow').style.transform).toMatch(/translate3d/);
+
+      jest.advanceTimersByTime(400);
+      expect(ball().style.transform).not.toBe(first.ball);
+      expect(sheet().style.transform).not.toBe(first.sheet);
+    });
+
+    it('keeps going for a long time', () => {
+      render(<QuietMode width={800} height={600} theme={theme} mark="boing" />);
+
+      jest.advanceTimersByTime(60_000);
+      const midway = ball().style.transform;
+
+      jest.advanceTimersByTime(1_000);
+      expect(ball().style.transform).not.toBe(midway);
+    });
+
+    it('stops cleanly when removed', () => {
+      const cancel = jest.spyOn(window, 'cancelAnimationFrame');
+      const { unmount } = render(<QuietMode width={800} height={600} theme={theme} mark="boing" />);
+
+      jest.advanceTimersByTime(100);
+      unmount();
+
+      expect(cancel).toHaveBeenCalled();
+      cancel.mockRestore();
+    });
+  });
+
   describe('the DVD logo', () => {
     it('is what quiet mode shows by default', () => {
       render(<QuietMode width={800} height={600} theme={theme} />);

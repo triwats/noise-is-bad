@@ -129,8 +129,9 @@ eventually see it hit a corner, and yes, they will tell everyone.
 | **Our logo** | The same drift, calmer, in your theme's colour. |
 | **3D text** | The Windows XP *3D Text* screensaver rebuilt in CSS: our lockup extruded and tumbling on all three axes in a black void, lit like it is 2003. Readable every couple of minutes, exactly as annoying as the original. |
 | **Flip clock** | The split-flap clock, as the Fliqlo screensaver draws it: hours and minutes on two cards, and once a minute a leaf falls. Twenty-four hours, the television's own time, nothing to set. |
+| **Boing ball** | The 1984 Amiga Boing demo: the red and white checkered ball, spinning on its tilted axis and bouncing across a grey room in front of the purple grid, its shadow on the wall. Built for the Raspberry Pi behind the television: once it is drawn, not a pixel is repainted. |
 
-`make quiet` opens the DVD logo fullscreen, `make spin` the 3D text, `make clock` the flip clock.
+`make quiet` opens the DVD logo fullscreen, `make spin` the 3D text, `make clock` the flip clock, `make boing` the Boing ball.
 
 The DVD logo is a trademark of DVD Format/Logo Licensing Corporation. noise is bad. is not affiliated with or endorsed by them; it is a credited nod to the screensaver, not a licensed use. The outline was traced from [bouncingdvdlogo.com](https://bouncingdvdlogo.com). Full credits, including the typeface and libraries the panel ships, are in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 

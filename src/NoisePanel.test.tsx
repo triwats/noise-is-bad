@@ -363,4 +363,10 @@ describe('settings reaching the drawing code', () => {
     expect(screen.getByTestId('flip-clock')).toBeInTheDocument();
     expect(screen.getAllByTestId('flip-card')).toHaveLength(2);
   });
+
+  it('passes the Boing ball through', () => {
+    render(<NoisePanel {...inScenario('all-quiet', { quietMark: 'boing' })} />);
+
+    expect(screen.getByTestId('boing-ball')).toBeInTheDocument();
+  });
 });

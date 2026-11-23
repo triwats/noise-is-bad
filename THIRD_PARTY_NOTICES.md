@@ -9,6 +9,10 @@ The **DVD logo** quiet-mode screensaver draws the DVD Video logo.
 - **Trademark.** The DVD Video logo is a trademark of DVD Format/Logo Licensing Corporation. noise is bad. is not affiliated with, sponsored by or endorsed by DVD Format/Logo Licensing Corporation, and no licence to the trademark is claimed. It appears as an affectionate nod to the bouncing DVD screensaver.
 - **Artwork.** The outline was traced from the images served at <https://bouncingdvdlogo.com>, by tbayri ([ttttttt.info](https://ttttttt.info)).
 
+## Boing ball
+
+The **Boing ball** quiet-mode screensaver is a tribute to the Boing demo, written by Dale Luck and RJ Mical for the Amiga in 1984. Nothing of the original is copied: the ball, the grid and their motion are drawn from scratch in `src/render/boing.ts`. Amiga is a trademark of its owner; noise is bad. is not affiliated with or endorsed by them.
+
 ## Archivo Black
 
 The 3D text and flip clock screensavers embed a Latin subset of the Archivo Black typeface.

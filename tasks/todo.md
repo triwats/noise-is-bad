@@ -883,3 +883,59 @@ unresolved, unsigned (expected until review accepts it).
       updating
 - [ ] Verify locally with the production compose before any VPS exists
 - [ ] Link it from the site and README
+
+## Follow-up — Boing ball screensaver
+
+**Goal:** a fourth quiet-mode screensaver, `quietMark: 'boing'`: the 1984 Amiga Boing demo. A red and white
+checkered ball, tilted on its axis and spinning, bouncing across a grey stage in front of a purple grid, with its
+shadow cast on the grid. The grid is what makes the spin read, so it is part of the screensaver, not decoration.
+
+**Behaviour spec**
+
+- Ball: 16 segments of longitude by 8 bands of latitude, alternating red and white, axis tilted ~17°.
+- Spins about its own axis; the spin reverses at each side wall, so it always rolls the way it travels.
+- Horizontal: constant speed, reflecting off the side walls (folded, like `bounce.ts`).
+- Vertical: a gravity parabola bouncing off the floor, perfectly elastic, so the height never decays.
+- Shadow: the ball's silhouette, translucent dark, offset right and down onto the grid.
+- Stage: grey (#aaaaaa-ish) with a purple back wall grid and a floor grid in perspective. Its own background like
+  the 3D text and flip clock, not `theme.canvas`.
+- No sound (a television in an office), no settings.
+
+**Plan**
+
+- [x] `src/render/boing.ts` — pure and clock-free: `boingAt(elapsedMs, bounds)` gives position, spin phase and
+      direction in closed form. A long frame gap or a sleeping tab lands the ball exactly where it should be.
+      Also the sphere facets: projected quads for a given spin phase, and `ballSize` for the stage.
+- [x] `src/render/BoingBall.tsx` — the shell. One `<canvas>` for the grid (redrawn only on resize) and one for the
+      ball and shadow, drawn per frame from a `requestAnimationFrame` loop with no React re-renders. 128 quads a
+      frame, no library, nothing in webpack.
+- [x] `QuietMode.tsx` — add `'boing'` to `QuietMark`, route it, give it the grey stage.
+- [x] `module.ts` — add "Boing ball" to the Quiet mark radio.
+- [x] Tests: `boing.test.ts` (walls reflect, floor bounce height constant, spin reverses at walls, positions
+      continuous across long gaps, ball always on stage); `QuietMode.test.tsx` routing; `NoisePanel.test.tsx`
+      "passes the Boing ball through" (wiring); an e2e that the ball actually moves.
+- [x] `quiet.json` and `states.json` — a Boing panel; `make boing` target.
+- [x] README screensaver table, CHANGELOG, `THIRD_PARTY_NOTICES.md` credit (Boing demo by Dale Luck and RJ Mical,
+      Amiga a trademark of its owner; no assets shipped, drawn from scratch).
+- [ ] Verify: `make check` (done), `make e2e` (written, not yet run: Docker was unresponsive), screenshot (done, standalone harness)
+
+### Review
+
+| Check | Result |
+| --- | --- |
+| typecheck, lint | clean |
+| unit tests | 445/445, 19 new in `boing.test.ts`, 5 in `QuietMode.test.tsx`, 1 wiring test |
+| wiring test | fails with the route removed, passes with it |
+| real browser, standalone harness | renders as the demo; 60fps; **zero paints** traced over 3s |
+| e2e against Grafana | written (`states.json` panel 13), **not run**: Docker daemon hung |
+
+**Decisions worth knowing**
+
+- Raspberry Pi drove the design. 16 spin pictures in one 4×4 sprite sheet, drawn once; capped at 512 device
+  pixels a frame so the sheet fits a 2048 texture. Per frame: three transforms, no drawing.
+- First version translated the canvas itself and traced a repaint per spin frame (~26/s). Moving a wrapper
+  `div` instead took it to zero. Recorded in CLAUDE.md.
+- Spin is a function of horizontal position, so reversing at the walls needs no state.
+- No new options, so the dashboard sweep rule does not apply; one panel added to `quiet.json` and `states.json`.
+- `src/README.md` (catalog README) has uncommitted edits in flight and was left alone; its credits line does
+  not yet mention the Boing demo.

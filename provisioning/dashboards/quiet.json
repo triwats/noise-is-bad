@@ -125,6 +125,38 @@
       ],
       "title": "noise is bad. quiet, flip clock",
       "type": "triwats-noiseisbad-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 4,
+      "options": {
+        "demoScenario": "all-quiet",
+        "quietMode": true,
+        "quietMark": "boing",
+        "spinText": "noise is bad.",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "db84e60d-b92a-4089-82cb-34842fb1754b"
+          }
+        }
+      ],
+      "title": "noise is bad. quiet, Boing ball",
+      "type": "triwats-noiseisbad-panel"
     }
   ],
   "refresh": "",

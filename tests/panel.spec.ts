@@ -101,6 +101,46 @@ test('tells the time on a flip clock, and flips the minute over', async ({
   await expect(hours).not.toHaveAttribute('data-flipping', 'true');
 });
 
+test('bounces the Boing ball in front of its grid, red and white, spinning', async ({
+  gotoPanelEditPage,
+  readProvisionedDashboard,
+  page,
+}) => {
+  const dashboard = await readProvisionedDashboard(dashboardFile);
+  await gotoPanelEditPage({ dashboard, id: '13' });
+
+  const ball = page.getByTestId('boing-ball');
+  await expect(ball).toBeVisible();
+  await expect(page.getByTestId('quiet-mark')).toBeHidden();
+  expect(await page.locator('[data-testid="boing"] line').count()).toBeGreaterThan(40);
+
+  // The sprite sheet really is drawn, in both colours, and nothing else.
+  const colours = await page.evaluate(() => {
+    const canvas = document.querySelector<HTMLCanvasElement>('[data-testid="boing-sheet"] canvas')!;
+    const { data } = canvas.getContext('2d')!.getImageData(0, 0, canvas.width, canvas.height);
+    let red = 0;
+    let white = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      if (data[i + 3] === 255 && data[i] === 255) {
+        data[i + 1] === 0 ? red++ : data[i + 1] === 255 && white++;
+      }
+    }
+    return { red, white };
+  });
+  expect(colours.red).toBeGreaterThan(1000);
+  expect(colours.white).toBeGreaterThan(1000);
+  expect(colours.red / colours.white).toBeGreaterThan(0.7);
+  expect(colours.red / colours.white).toBeLessThan(1.4);
+
+  const sheet = page.getByTestId('boing-sheet');
+  const before = { box: (await ball.boundingBox())!, spin: await sheet.getAttribute('style') };
+  await page.waitForTimeout(700);
+  const after = { box: (await ball.boundingBox())!, spin: await sheet.getAttribute('style') };
+
+  expect(Math.abs(after.box.x - before.box.x) + Math.abs(after.box.y - before.box.y)).toBeGreaterThan(5);
+  expect(after.spin).not.toBe(before.spin);
+});
+
 test('tumbles the 3D text on all three axes and keeps it on screen', async ({
   gotoPanelEditPage,
   readProvisionedDashboard,

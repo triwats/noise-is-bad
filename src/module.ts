@@ -102,6 +102,11 @@ export const plugin = new PanelPlugin<NoiseOptions>(NoisePanel).setPanelOptions(
           { value: 'text', label: 'Our logo' },
           { value: '3d', label: '3D text' },
           { value: 'flip', label: 'Flip clock' },
+          {
+            value: 'boing',
+            label: 'Boing ball',
+            description: 'The Amiga Boing demo, by Dale Luck and RJ Mical, 1984. Redrawn, not copied.',
+          },
         ],
       },
       showIf: (options) => options.quietMode,
