@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Assembles the project site into _site/, ready for GitHub Pages.
+# Assembles the project site into _site/, or into $SITE_OUT when set. The public
+# server builds it that way and serves it at the root of noiseisbad.triwats.com
+# (see deploy/build-site.sh).
 #
 # site/ holds only what is written by hand. Everything else is taken from where it
 # already lives, so the site can never show a different mark, font or clip from the
@@ -9,12 +11,14 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/.." && pwd)"
-out="$root/_site"
+out="${SITE_OUT:-$root/_site}"
 
-rm -rf "$out"
+# Empty it rather than remove it: on the server it is a mounted volume.
+mkdir -p "$out"
+find "$out" -mindepth 1 -delete
 mkdir -p "$out/media"
 
-cp "$root"/site/index.html "$root"/site/style.css "$root"/site/CNAME "$out/"
+cp "$root"/site/index.html "$root"/site/style.css "$out/"
 cp "$root"/docs/brand/lockup-light.svg "$root"/docs/brand/lockup-dark.svg "$out/media/"
 cp "$root"/src/img/logo.svg "$out/media/logo.svg"
 cp "$root"/src/render/fonts/OFL.txt "$out/media/archivo-black-OFL.txt"

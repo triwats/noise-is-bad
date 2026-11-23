@@ -32,7 +32,7 @@ make boing     # the same, with the Amiga Boing ball
 make site      # build the project site into _site/ and serve it on :8000
 ```
 
-**The project site** is <https://noiseisbad.triwats.com>, GitHub Pages deployed by `.github/workflows/pages.yml`. `site/` holds only the hand-written page; `site/build.sh` pulls in the lockups, logo, font and demo clips from where they already live, so the site can never show a different mark from the plugin. Never copy a generated asset into `site/`. The address is `noiseisbad`, the name is still `noise is bad.`.
+**The project site** is <https://noiseisbad.triwats.com>, served by Caddy on the demo server alongside the live demo at `/demo/` (see `deploy/README.md`); there is no GitHub Pages. The server builds it from the deployed commit with `site/build.sh`, only when its sources changed. `site/` holds only the hand-written page; `site/build.sh` pulls in the lockups, logo, font and demo clips from where they already live, so the site can never show a different mark from the plugin. Never copy a generated asset into `site/`. The address is `noiseisbad`, the name is still `noise is bad.`.
 
 Note on Jest: `d3-hierarchy` and its dependencies ship ES modules only, so the root `jest.config.js` extends the scaffold's `transformIgnorePatterns`. Any future ESM-only dependency needs adding to that list, and the root config is the place to do it, never `.config/`.
 

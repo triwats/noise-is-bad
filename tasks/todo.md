@@ -887,7 +887,9 @@ unresolved, unsigned (expected until review accepts it).
 Decisions (2026-11-23): a Cloudflare Tunnel instead of Caddy on 80/443, so the server publishes no ports and its
 address is not exposed; Caddy stays, internal, as the gatekeeper. SSH moves to Tailscale. The image's `ubuntu`
 user instead of a separate `deploy` user. The demo installs plain releases, `v0.0.1` upward, keeping `v1.0.0` for the
-catalog. Server done: SSH keys only and no root, unattended upgrades, Docker, Tailscale joined, ufw allowing
+catalog. Revised the same day: one name, `noiseisbad.triwats.com`, with the site at `/` and the demo at `/demo/`,
+both on the server through the tunnel. `demo.noiseisbad` needed Advanced Certificate Manager ($10/month, declined),
+so GitHub Pages is dropped and the server builds the site. Server done: SSH keys only and no root, unattended upgrades, Docker, Tailscale joined, ufw allowing
 only 22 (until the laptop is on the tailnet).
 
 ## Follow-up — Boing ball screensaver

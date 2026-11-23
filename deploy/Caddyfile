@@ -1,4 +1,4 @@
-# noise is bad. public demo: the gatekeeper in front of Grafana.
+# noise is bad.: the project site at /, the public demo at /demo/.
 #
 # Nothing reaches Caddy from the internet directly. Visitors arrive through a
 # Cloudflare Tunnel: cloudflared dials out to Cloudflare and hands requests to
@@ -22,20 +22,35 @@
 		-Via
 	}
 
-	# The front door is the demo, full screen, as a television would show it.
-	redir / /d/a538aeff-5a8a-42a5-901c-938d896fdd6f/noise-is-bad?viewPanel=1&kiosk 302
+	# --- the demo: Grafana, served from /demo/ -------------------------------
+
+	# The way in is the demo, full screen, as a television would show it.
+	redir /demo /demo/ 302
+	redir /demo/ /demo/d/a538aeff-5a8a-42a5-901c-938d896fdd6f/noise-is-bad?viewPanel=1&kiosk 302
 
 	# Grafana pages a viewer has no business on. Grafana already refuses the
 	# actions behind most of them; this keeps the pages themselves out of reach.
-	@pages path /login* /signup* /user/* /profile* /explore* /drilldown* /admin* /org* /connections* /datasources* /plugins* /a/* /alerting* /dashboard/new* /dashboard/import* /dashboard/snapshots* /library-panels* /playlists* /swagger* /openapi*
-	redir @pages / 302
+	@pages path /demo/login* /demo/signup* /demo/user/* /demo/profile* /demo/explore* /demo/drilldown* /demo/admin* /demo/org* /demo/connections* /demo/datasources* /demo/plugins* /demo/a/* /demo/alerting* /demo/dashboard/new* /demo/dashboard/import* /demo/dashboard/snapshots* /demo/library-panels* /demo/playlists* /demo/swagger* /demo/openapi*
+	redir @pages /demo/ 302
 
 	# API surface the panel never needs: the plugin list, the raw datasource
 	# proxy, the grafana.com proxy, snapshots, admin, and Grafana's own metrics.
-	@api {
-		path /api/plugins /api/datasources /api/datasources/proxy/* /api/gnet/* /api/snapshots* /api/snapshot/* /api/admin/* /api/playlists* /api/live/* /metrics /metrics/*
-	}
-	respond @api 404
+	@api path /demo/api/plugins /demo/api/datasources /demo/api/datasources/proxy/* /demo/api/gnet/* /demo/api/snapshots* /demo/api/snapshot/* /demo/api/admin/* /demo/api/playlists* /demo/api/live/* /demo/metrics /demo/metrics/*
 
-	reverse_proxy grafana:3000
+	# The 404 sits inside the same block as the proxy on purpose: Caddy runs
+	# `handle` before a top-level `respond`, so outside it the proxy would win
+	# and these paths would reach Grafana. deploy/check.sh tests every one.
+	handle /demo/* {
+		respond @api 404
+		reverse_proxy grafana:3000
+	}
+
+	# --- the project site, built by deploy/build-site.sh ---------------------
+
+	handle {
+		root * /srv/site
+		file_server {
+			hide .*
+		}
+	}
 }

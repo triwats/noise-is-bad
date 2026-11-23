@@ -1,4 +1,5 @@
-# noise is bad. public demo: https://demo.noiseisbad.triwats.com
+# noise is bad.: the project site at https://noiseisbad.triwats.com/ and the
+# public demo at https://noiseisbad.triwats.com/demo/
 #
 # Read-only, anonymous Grafana showing the panel, behind Caddy, reached only
 # through a Cloudflare Tunnel. Nothing publishes a port: cloudflared dials out
@@ -35,8 +36,9 @@ services:
           memory: 64M
     logging: *logging
 
-  # The gatekeeper: headers, the front-door redirect, the blocked paths.
-  # Plain HTTP on the internal network; Cloudflare does the HTTPS.
+  # The gatekeeper: serves the site, sends /demo/ to Grafana, blocks the
+  # paths a viewer has no business on. Plain HTTP on the internal network;
+  # Cloudflare does the HTTPS.
   caddy:
     image: caddy:${CADDY_VERSION:-2.10.2}-alpine
     restart: unless-stopped
@@ -44,16 +46,36 @@ services:
       GOMEMLIMIT: 100MiB
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - site:/srv/site:ro
       - caddy-data:/data
       - caddy-config:/config
     networks: [edge]
     depends_on:
+      site:
+        condition: service_completed_successfully
       grafana:
         condition: service_healthy
     deploy:
       resources:
         limits:
           memory: 128M
+    logging: *logging
+
+  # Builds the project site into the site volume, then exits. Skips the build
+  # when nothing the site is made from has changed. See build-site.sh.
+  site:
+    build: ./site
+    image: noise-is-bad-site-builder:local
+    restart: 'no'
+    command: ['bash', '/repo/deploy/build-site.sh']
+    network_mode: none
+    volumes:
+      - ..:/repo:ro
+      - site:/site
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     logging: *logging
 
   # Puts the panel into the plugins volume, then exits. See fetch-plugin.sh.
@@ -82,8 +104,10 @@ services:
     environment:
       GOMEMLIMIT: 400MiB
       GF_LOG_LEVEL: warn
-      GF_SERVER_DOMAIN: ${DOMAIN:-demo.noiseisbad.triwats.com}
-      GF_SERVER_ROOT_URL: ${ROOT_URL:-https://demo.noiseisbad.triwats.com/}
+      GF_SERVER_DOMAIN: ${DOMAIN:-noiseisbad.triwats.com}
+      GF_SERVER_ROOT_URL: ${ROOT_URL:-https://noiseisbad.triwats.com/demo/}
+      # The site has the root; Grafana lives under /demo/.
+      GF_SERVER_SERVE_FROM_SUB_PATH: 'true'
       GF_PATHS_PLUGINS: /var/lib/grafana-plugins
 
       # Anyone may look; nobody may sign in, sign up or change anything.
@@ -147,7 +171,7 @@ services:
       - ../provisioning/dashboards/transitions.json:/etc/grafana/dashboards/transitions.json:ro
     networks: [edge, estate]
     healthcheck:
-      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://localhost:3000/api/health']
+      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://localhost:3000/demo/api/health']
       interval: 30s
       timeout: 5s
       retries: 3
@@ -207,3 +231,4 @@ volumes:
   grafana-data: {}
   plugins: {}
   prometheus-data: {}
+  site: {}

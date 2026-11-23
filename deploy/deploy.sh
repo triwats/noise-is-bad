@@ -21,7 +21,7 @@ set -euo pipefail
 
 host="${DEPLOY_HOST:-noiseisbad-demo}"
 dir="${DEPLOY_DIR:-noise-is-bad}"          # relative to the server user's home
-url="${DEPLOY_URL:-https://demo.noiseisbad.triwats.com}"
+url="${DEPLOY_URL:-https://noiseisbad.triwats.com}"
 repo="https://github.com/triwats/noise-is-bad.git"
 
 ref=HEAD
@@ -55,7 +55,9 @@ fi
 
 echo "deploying $(git log -1 --format='%h %s' "$sha") to $host"
 
-ssh "$host" bash -s -- "$repo" "$dir" "$sha" "$plugin" <<'REMOTE'
+# SSH joins its arguments into one string for the remote shell, which drops an
+# empty one (no --plugin) and splits any with spaces. Quote each for that shell.
+ssh "$host" "bash -s -- $(printf '%q ' "$repo" "$dir" "$sha" "$plugin")" <<'REMOTE'
 set -euo pipefail
 repo="$1"; dir="$2"; sha="$3"; plugin="$4"
 cd ~
@@ -66,6 +68,7 @@ git -c advice.detachedHead=false checkout --quiet --detach "$sha"
 cd deploy
 if [ ! -f .env ]; then
   cp .env.example .env
+  chmod 600 .env   # it will hold the tunnel token
   echo "created deploy/.env from the example; review it on the server"
 fi
 if [ -n "$plugin" ]; then
@@ -80,7 +83,7 @@ REMOTE
 
 echo "waiting for $url"
 for _ in $(seq 1 30); do
-  curl -fsS -o /dev/null "$url/api/health" 2>/dev/null && break
+  curl -fsS -o /dev/null "$url/demo/api/health" 2>/dev/null && break
   sleep 2
 done
 "$here/check.sh" "$url"

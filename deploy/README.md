@@ -1,19 +1,20 @@
-# noise is bad. public demo
+# noise is bad. site and public demo
 
-The panel running in real Grafana at <https://demo.noiseisbad.triwats.com>, for anyone to look at and nobody to change.
+One server, one name: the project site at <https://noiseisbad.triwats.com/>, and the panel running in real Grafana at <https://noiseisbad.triwats.com/demo/>, for anyone to look at and nobody to change.
 
 ```
-visitor ──HTTPS──▶ Cloudflare ◀──outbound tunnel── cloudflared ──▶ caddy ──▶ grafana ──▶ prometheus ──▶ exporter
-                   (TLS, DDoS,                     └──────────── on the server, no published ports ────────────┘
-                    WAF, cache)
+visitor ──HTTPS──▶ Cloudflare ◀──outbound tunnel── cloudflared ──▶ caddy ─┬─ /        the site (static files)
+                   (TLS, DDoS,                                               └─ /demo/*  grafana ──▶ prometheus ──▶ exporter
+                    WAF, cache)                    └────────── on the server, no published ports ──────────┘
 you ──Tailscale──▶ SSH
 ```
 
 - **Nothing on the server listens publicly.** Visitors reach it through a Cloudflare Tunnel: `cloudflared` dials out to Cloudflare and hands requests to Caddy, so the firewall allows no inbound traffic from the internet and the server's address is never published. Cloudflare terminates HTTPS. SSH answers only on the Tailscale interface.
-- **Caddy is the gatekeeper, not the front.** It sets the headers, sends the front door to the demo and blocks the paths a viewer has no business on, over plain HTTP on the internal network.
+- **Caddy is the gatekeeper, not the front.** It serves the site, sends `/demo/` to Grafana, sets the headers and blocks the paths a viewer has no business on, over plain HTTP on the internal network.
+- **The site is built on the server** from this repository by `site/build.sh`, in a throwaway container with no network, and only when its sources changed since the last build. Nothing generated is committed. The site shares the server's fate: if the server is down, so is the site.
 - The exporter's control page (9101) and Prometheus (9090) are on an internal Docker network with no internet access, so visitors can watch the shop break but cannot break it themselves.
-- **Visitors are anonymous Viewers.** There is no login form, no basic auth, no sign-up, and no admin account at all. Explore, alerting, snapshots, public dashboards, query history, live and Grafana's own `/metrics` are switched off; Caddy also sends the pages behind them (login, admin, connections, plugins, profile) back to the front door and returns 404 for the plugin list, the datasource list, the raw datasource proxy and the admin API.
-- **The front door** (`/`) redirects to the main demo (the `lifecycle` scenario), full screen in kiosk mode.
+- **Visitors are anonymous Viewers.** There is no login form, no basic auth, no sign-up, and no admin account at all. Explore, alerting, snapshots, public dashboards, query history, live and Grafana's own `/metrics` are switched off; Caddy also sends the pages behind them (login, admin, connections, plugins, profile) back to the demo and returns 404 for the plugin list, the datasource list, the raw datasource proxy and the admin API.
+- **The way into the demo** (`/demo/`) redirects to the main demo (the `lifecycle` scenario), full screen in kiosk mode. Grafana serves from the `/demo/` sub-path.
 - **Dashboards shown:** the demo, real data (Prometheus), Sloth, quiet (DVD logo, 3D text, flip clock, Boing ball) and transitions. `states` (for the e2e suite) and `recording` (for the README GIF) are left off.
 - **Unattended for months:** every container restarts unless stopped, logs rotate at 3 × 10 MB per container, Prometheus keeps one day, and the plugin is downloaded once per version, so a reboot never depends on GitHub being up.
 
@@ -22,16 +23,17 @@ Files:
 | File | What it is |
 | --- | --- |
 | `compose.yaml` | The stack. Images are pinned; versions come from `.env`. |
-| `Caddyfile` | Security headers, the front-door redirect, the blocked paths. |
+| `Caddyfile` | The site at `/`, Grafana at `/demo/`, security headers, the blocked paths. |
+| `build-site.sh`, `site/Dockerfile` | Run by the `site` container before Caddy starts: builds the project site into a volume, skipping the build when nothing changed. |
 | `fetch-plugin.sh` | Run by the `plugin` container before Grafana starts: downloads the release zip into a volume. |
 | `grafana/dashboards.yaml` | Provisions the dashboards mounted from `../provisioning/dashboards`. |
 | `compose.local.yaml` | Runs the same stack on your laptop at <http://localhost:8080>, without the tunnel, with the panel from `../dist`. |
-| `check.sh` | Checks the live site from outside, as a visitor. |
+| `check.sh` | Checks the live site and demo from outside, as a visitor. |
 | `deploy.sh` | Deploys a pushed commit from your laptop over SSH. Knows nothing about the server. |
 | `set-tunnel-token.sh` | Puts the Cloudflare Tunnel token on the server from your laptop, input hidden. |
 | `.env.example` | Settings. Copy to `.env`. |
 
-Memory limits: Grafana 512 MB, Prometheus 256 MB, Caddy 128 MB, cloudflared 64 MB, exporter 64 MB, about 1 GB in all, so the stack fits a 2 GB server with room for the OS.
+Memory limits: Grafana 512 MB, Prometheus 256 MB, Caddy 128 MB, cloudflared 64 MB, exporter 64 MB, about 1 GB in all, so the stack fits a 2 GB server with room for the OS. The site builder may use up to 1 GB while it runs, during a deploy only.
 
 ## 1. Create the server
 
@@ -79,7 +81,7 @@ The tunnel is created in Cloudflare and only *run* on the server.
 
 1. In the Cloudflare dashboard, open **Zero Trust → Networks → Tunnels** and **Create a tunnel**. Choose **Cloudflared** and name it `noiseisbad-demo`.
 2. On the install step, pick **Docker**. The command shown ends in `--token <long string>`. That string is the token: copy it, and do not run the command. The token is a password for the tunnel; it goes in the server's `deploy/.env` and nowhere else (see below).
-3. Add the **public hostname** (also called a published application route): subdomain `demo.noiseisbad`, domain `triwats.com`, service type **HTTP**, URL **`caddy:80`**. Cloudflare creates the proxied DNS record itself; do not add an A record.
+3. Add the **public hostname** (also called a published application route): subdomain `noiseisbad`, domain `triwats.com`, no path, service type **HTTP**, URL **`caddy:80`**. Cloudflare creates the proxied DNS record itself; do not add an A record, and delete any record already on that name. Keep the name **one level** under `triwats.com`: the free Universal certificate covers `*.triwats.com` only, and a deeper name fails the TLS handshake at Cloudflare (`SSL_ERROR_NO_CYPHER_OVERLAP`) unless you pay for Advanced Certificate Manager.
 4. Optional, in the `triwats.com` zone: **SSL/TLS → Edge Certificates**, turn on **Always Use HTTPS** and set the minimum TLS version to 1.2.
 
 Then, from the repository root on your laptop, after the first `deploy/deploy.sh` (so the checkout exists on the server):
@@ -132,7 +134,7 @@ docker compose ps    # plugin "exited (0)", everything else "running"/"healthy"
 ./check.sh
 ```
 
-Open <https://demo.noiseisbad.triwats.com>. If Cloudflare shows an error page, `docker compose logs cloudflared` says whether the tunnel connected.
+Open <https://noiseisbad.triwats.com/> and <https://noiseisbad.triwats.com/demo/>. The first deploy builds the site, which takes a few minutes. If Cloudflare shows an error page, `docker compose logs cloudflared` says whether the tunnel connected.
 
 If the `plugin` container failed, `docker compose logs plugin` says why: usually a release that does not exist yet, or a version in `.env` that does not match the zip.
 

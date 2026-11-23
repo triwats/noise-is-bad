@@ -23,7 +23,7 @@ services:
   grafana:
     environment:
       GF_SERVER_DOMAIN: localhost
-      GF_SERVER_ROOT_URL: http://localhost:8080/
+      GF_SERVER_ROOT_URL: http://localhost:8080/demo/
       GF_SECURITY_COOKIE_SECURE: 'false'
     volumes:
       - ../dist:/var/lib/grafana-plugins/triwats-noiseisbad-panel:ro
