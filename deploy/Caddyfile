@@ -1,11 +1,15 @@
-# noise is bad. public demo: the only thing on the box that listens publicly.
-# Caddy gets and renews the certificate for {$DOMAIN} by itself.
+# noise is bad. public demo: the gatekeeper in front of Grafana.
+#
+# Nothing reaches Caddy from the internet directly. Visitors arrive through a
+# Cloudflare Tunnel: cloudflared dials out to Cloudflare and hands requests to
+# Caddy over the internal network, so the server publishes no ports at all.
+# Cloudflare terminates HTTPS, which is why Caddy serves plain HTTP here.
 {
-	# Optional: an address Let's Encrypt can warn about expiring certificates.
-	email {$ACME_EMAIL:}
+	auto_https off
+	admin off
 }
 
-{$DOMAIN:demo.noiseisbad.triwats.com} {
+:80 {
 	encode zstd gzip
 
 	header {

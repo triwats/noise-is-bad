@@ -884,6 +884,12 @@ unresolved, unsigned (expected until review accepts it).
 - [ ] Verify locally with the production compose before any VPS exists
 - [ ] Link it from the site and README
 
+Decisions (2026-11-23): a Cloudflare Tunnel instead of Caddy on 80/443, so the server publishes no ports and its
+address is not exposed; Caddy stays, internal, as the gatekeeper. SSH moves to Tailscale. The image's `ubuntu`
+user instead of a separate `deploy` user. The demo installs pre-release `v1.0.0-rc.1`, keeping `v1.0.0` for the
+catalog. Server done: SSH keys only and no root, unattended upgrades, Docker, Tailscale joined, ufw allowing
+only 22 (until the laptop is on the tailnet).
+
 ## Follow-up — Boing ball screensaver
 
 **Goal:** a fourth quiet-mode screensaver, `quietMark: 'boing'`: the 1984 Amiga Boing demo. A red and white

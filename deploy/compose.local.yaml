@@ -1,18 +1,20 @@
 # Local trial of the public demo, alongside the dev stack (which owns 3000,
-# 9090 and 9101). Caddy serves https://localhost:8443 with its own internal CA,
-# and the panel comes from ../dist rather than a GitHub release.
+# 9090 and 9101). There is no tunnel locally: Caddy is published on
+# http://localhost:8080 instead, and the panel comes from ../dist rather than a
+# GitHub release.
 #
 #   npm run build   # in the repository root, if dist/ is missing
 #   docker compose -f compose.yaml -f compose.local.yaml -p noise-is-bad-demo-local up -d --build
-#   curl -k https://localhost:8443/api/health
+#   ./check.sh http://localhost:8080
 #   docker compose -p noise-is-bad-demo-local down -v
 services:
+  cloudflared:
+    # Never started locally.
+    profiles: [tunnel]
+
   caddy:
-    ports: !override
+    ports:
       - '127.0.0.1:8080:80'
-      - '127.0.0.1:8443:443'
-    environment:
-      DOMAIN: localhost
 
   plugin:
     environment:
@@ -21,6 +23,7 @@ services:
   grafana:
     environment:
       GF_SERVER_DOMAIN: localhost
-      GF_SERVER_ROOT_URL: https://localhost:8443/
+      GF_SERVER_ROOT_URL: http://localhost:8080/
+      GF_SECURITY_COOKIE_SECURE: 'false'
     volumes:
       - ../dist:/var/lib/grafana-plugins/triwats-noiseisbad-panel:ro

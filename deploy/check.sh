@@ -2,7 +2,7 @@
 # Checks the public demo from the outside, as an anonymous visitor would see it.
 #
 #   ./check.sh                                  # the real thing
-#   ./check.sh https://localhost:8443 -k        # the local trial (self-signed)
+#   ./check.sh http://localhost:8080            # the local trial (no tunnel)
 #
 # Prints one line per check and exits non-zero if any failed.
 set -u
@@ -74,6 +74,11 @@ done
 headers=$($CURL -D - -o /dev/null "$BASE/d/$DASH/noise-is-bad")
 echo "$headers" | grep -qi '^strict-transport-security:' && ok 'HSTS is set' || fail 'HSTS is set' 'missing'
 echo "$headers" | grep -qi "frame-ancestors" && ok 'framing is limited by CSP' || fail 'framing is limited by CSP' 'no frame-ancestors'
-echo "$headers" | grep -qi '^server:' && fail 'no Server header' 'present' || ok 'no Server header'
+# Cloudflare names itself; nothing behind it may.
+server=$(echo "$headers" | grep -i '^server:' | tr -d '\r' | cut -d' ' -f2-)
+case "$server" in
+  ''|cloudflare) ok 'the Server header names nothing behind Cloudflare' ;;
+  *) fail 'the Server header names nothing behind Cloudflare' "server: $server" ;;
+esac
 
 exit $FAILED

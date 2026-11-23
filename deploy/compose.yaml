@@ -1,8 +1,10 @@
 # noise is bad. public demo: https://demo.noiseisbad.triwats.com
 #
-# Read-only, anonymous Grafana showing the panel, behind Caddy. Only Caddy
-# publishes ports. The pretend estate (with its control page) and Prometheus
-# sit on an internal network with no way in from outside and no way out.
+# Read-only, anonymous Grafana showing the panel, behind Caddy, reached only
+# through a Cloudflare Tunnel. Nothing publishes a port: cloudflared dials out
+# to Cloudflare, so the server needs no open inbound ports at all. The pretend
+# estate (with its control page) and Prometheus sit on an internal network
+# with no way in from outside and no way out.
 #
 # Run from this directory:  docker compose up -d
 # Settings live in .env (copy .env.example). See README.md.
@@ -16,16 +18,29 @@ x-logging: &logging
     max-file: '3'
 
 services:
+  # The way in. Holds an outbound connection to Cloudflare and passes each
+  # request to Caddy. The token in .env is the only secret in the stack, and
+  # it lives on the server alone.
+  cloudflared:
+    image: cloudflare/cloudflared:${CLOUDFLARED_VERSION:-2026.11.1}
+    restart: unless-stopped
+    command: ['tunnel', '--no-autoupdate', 'run']
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:-}
+    networks: [edge]
+    depends_on: [caddy]
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+    logging: *logging
+
+  # The gatekeeper: headers, the front-door redirect, the blocked paths.
+  # Plain HTTP on the internal network; Cloudflare does the HTTPS.
   caddy:
     image: caddy:${CADDY_VERSION:-2.10.2}-alpine
     restart: unless-stopped
-    ports:
-      - '80:80'
-      - '443:443'
-      - '443:443/udp'
     environment:
-      DOMAIN: ${DOMAIN:-demo.noiseisbad.triwats.com}
-      ACME_EMAIL: ${ACME_EMAIL:-}
       GOMEMLIMIT: 100MiB
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
@@ -180,7 +195,7 @@ services:
     logging: *logging
 
 networks:
-  # Caddy and Grafana. Has internet access, for certificates and the plugin zip.
+  # cloudflared, Caddy and Grafana. Has internet access, for the tunnel and the plugin zip.
   edge: {}
   # Grafana, Prometheus and the exporter. No internet, no published ports.
   estate:
