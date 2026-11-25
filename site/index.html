@@ -31,6 +31,7 @@
         </picture>
       </a>
       <nav aria-label="Project">
+        <a href="demo/">Live demo</a>
         <a href="https://github.com/triwats/noise-is-bad">Source</a>
         <a href="https://github.com/triwats/noise-is-bad/blob/main/docs/getting-started.md">Docs</a>
         <a href="#support">Support</a>
@@ -44,7 +45,12 @@
           A Grafana panel for the office television. The screen gets noisier as more things break. Nothing healthy is
           ever drawn, so you can tell how bad it is from across the room without reading a word.
         </p>
-        <figure class="screen">
+        <!--
+          The launch video. Put its YouTube ID in data-youtube (the 11 characters after "v=") and it replaces the
+          clip below, embedded from youtube-nocookie.com so nothing tracks a visitor until they press play. Until
+          then the recorded demo stands in, so the page is never empty.
+        -->
+        <figure class="screen launch" data-youtube="">
           <video
             autoplay
             muted
@@ -64,13 +70,15 @@
           </figcaption>
         </figure>
         <p class="actions">
-          <a class="button" href="https://github.com/triwats/noise-is-bad/blob/main/docs/install.md">Install it</a>
-          <a class="button quiet" href="https://github.com/triwats/noise-is-bad">See the source</a>
+          <a class="button" href="demo/">Try the live demo</a>
+          <a class="button quiet" href="https://github.com/triwats/noise-is-bad/blob/main/docs/install.md"
+            >Install it</a
+          >
         </p>
       </section>
 
       <section>
-        <h2>Read it from ten metres</h2>
+        <h2>How it works</h2>
         <p>The screen represents attention, not infrastructure. All of it goes to whatever deserves attention now.</p>
         <ol class="ladder">
           <li><span class="state">Nothing wrong</span><span>Quiet. A mark drifts around the screen.</span></li>
@@ -87,8 +95,8 @@
           <h2>When nothing is wrong</h2>
           <p>
             The screen goes quiet and a screensaver takes over: the bouncing DVD logo, the Windows XP
-            <i>3D Text</i> rebuilt in CSS, or a split-flap clock. A calm screen means a calm estate. There is no wall of
-            green for anyone to learn to ignore.
+            <i>3D Text</i> rebuilt in CSS, a split-flap clock, or the Amiga's Boing ball. A calm screen means a calm
+            estate. There is no wall of green for anyone to learn to ignore.
           </p>
           <p class="small">
             The DVD logo is a trademark of DVD Format/Logo Licensing Corporation. noise is bad. is not affiliated with
@@ -110,6 +118,25 @@
             <source src="media/dvd-screensaver.mp4" type="video/mp4" />
           </video>
         </figure>
+      </section>
+
+      <section class="try">
+        <h2>See it running</h2>
+        <p>
+          The demo is real Grafana with the panel installed, watching a pretend online shop of seven services. It is
+          yours to poke at and nothing you do is saved: wander through the dashboards, and open <b>Inspect</b> on
+          any panel to see its query and settings. Start on the welcome page, or put the television view on a screen
+          of your own.
+        </p>
+        <ul class="tour">
+          <li><b>Watch it break.</b> A shipping incident spreads, then recovers, on an 84-second loop.</li>
+          <li><b>No issues.</b> Every screensaver, side by side.</li>
+          <li><b>Real data.</b> The same panel reading Prometheus, and Sloth's rules untouched.</li>
+        </ul>
+        <p class="actions">
+          <a class="button" href="demo/">Try the live demo</a>
+          <a class="button quiet" href="demo/tv">Put it on a TV</a>
+        </p>
       </section>
 
       <section>
@@ -195,6 +222,20 @@
       </p>
     </footer>
     <script>
+      // The launch video, once it has an ID. Anything that is not a YouTube ID is ignored, so a typo leaves the clip.
+      const launch = document.querySelector('.launch');
+      const id = launch && launch.dataset.youtube;
+      if (id && /^[A-Za-z0-9_-]{11}$/.test(id)) {
+        const frame = document.createElement('iframe');
+        frame.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0`;
+        frame.title = 'noise is bad., the launch video';
+        frame.allow = 'accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        frame.loading = 'lazy';
+        launch.querySelector('video').replaceWith(frame);
+        launch.querySelector('figcaption').remove();
+      }
+
       // Respect a request for less motion: hold the clips still and hand the viewer the controls.
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
         for (const v of document.querySelectorAll('video')) {

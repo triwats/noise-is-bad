@@ -162,6 +162,27 @@ p {
     0 24px 48px -24px rgb(0 0 0 / 0.6);
 }
 
+.screen iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #000;
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 8px #000,
+    0 24px 48px -24px rgb(0 0 0 / 0.6);
+}
+
+.tour {
+  padding-left: 1.2rem;
+  max-width: 42rem;
+}
+
+.tour li {
+  margin: 6px 0;
+}
+
 .screen figcaption {
   margin-top: 20px;
   font-size: 0.9rem;

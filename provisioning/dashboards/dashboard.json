@@ -19,9 +19,45 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
-  "links": [],
+  "links": [
+    {
+      "type": "dashboards",
+      "tags": [
+        "noise-is-bad-demo"
+      ],
+      "asDropdown": false,
+      "includeVars": false,
+      "keepTime": false,
+      "targetBlank": false,
+      "title": "noise is bad.",
+      "icon": "external link",
+      "tooltip": "",
+      "url": ""
+    }
+  ],
   "liveNow": false,
   "panels": [
+    {
+      "id": 100,
+      "type": "text",
+      "title": "",
+      "transparent": true,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 3
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "[← Welcome](d/noise-is-bad-welcome) · **A shipping incident, on an 84-second loop.** Quiet, then one problem takes the whole screen, then the\nboard breaks up as checkout, the basket and orders follow shipping down, then it recovers. Search, accounts and\nreviews never appear: nothing is wrong with them.\n",
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        }
+      }
+    },
     {
       "datasource": {
         "type": "grafana-testdata-datasource",
@@ -31,7 +67,7 @@
         "h": 22,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "id": 1,
       "options": {
@@ -65,7 +101,9 @@
   ],
   "refresh": "",
   "schemaVersion": 39,
-  "tags": [],
+  "tags": [
+    "noise-is-bad-demo"
+  ],
   "templating": {
     "list": []
   },
@@ -75,7 +113,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "noise is bad.",
+  "title": "noise is bad. watch it break",
   "uid": "a538aeff-5a8a-42a5-901c-938d896fdd6f",
   "version": 1,
   "weekStart": "",

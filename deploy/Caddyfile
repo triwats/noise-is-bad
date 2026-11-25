@@ -24,9 +24,10 @@
 
 	# --- the demo: Grafana, served from /demo/ -------------------------------
 
-	# The way in is the demo, full screen, as a television would show it.
+	# /demo/ is ordinary Grafana, read-only, opening on the Welcome dashboard.
+	# /demo/tv is the television: the main demo, full screen, no Grafana chrome.
 	redir /demo /demo/ 302
-	redir /demo/ /demo/d/a538aeff-5a8a-42a5-901c-938d896fdd6f/noise-is-bad?viewPanel=1&kiosk 302
+	redir /demo/tv /demo/d/a538aeff-5a8a-42a5-901c-938d896fdd6f/noise-is-bad?viewPanel=1&kiosk 302
 
 	# Grafana pages a viewer has no business on. Grafana already refuses the
 	# actions behind most of them; this keeps the pages themselves out of reach.

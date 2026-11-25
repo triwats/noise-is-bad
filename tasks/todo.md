@@ -947,3 +947,42 @@ shadow cast on the grid. The grid is what makes the spin read, so it is part of 
 - No new options, so the dashboard sweep rule does not apply; one panel added to `quiet.json` and `states.json`.
 - `src/README.md` (catalog README) has uncommitted edits in flight and was left alone; its credits line does
   not yet mention the Boing demo.
+
+## Launch — a welcoming site and demo
+
+**Goal:** someone arriving at noiseisbad.triwats.com watches the launch video, understands how it works, then
+walks into a real, read-only Grafana that welcomes them and shows the product off, quiet screens included.
+
+**Site (`site/index.html`, served at `/`)**
+
+- [x] Launch video first: a YouTube embed (youtube-nocookie.com, no tracking until played), filled in by one
+      video ID; until it exists, the recorded lifecycle clip stands in so the page is never broken
+- [x] "How it works" straight after: the governing rule, quiet / one incident / treemap, what it reads
+- [x] Then the way in: "Try the live demo" to `/demo/`, plus "Put it on a TV" to `/demo/tv`
+- [x] The rest of the page (feed it one number, install, support) stays
+
+**Grafana (`/demo/`)**
+
+- [x] `/demo/` opens normal Grafana, menus and dashboard list visible, on a new **Welcome** dashboard
+- [x] `/demo/tv` is the full-screen television view (the `lifecycle` demo in kiosk), what `/demo/` was before
+- [x] Read-only throughout: visitors browse every dashboard and can **Inspect** any panel. Grafana still opens
+      the panel editor at `?editPanel=1`, found in the screenshots; every save is refused, so changes live only in
+      that browser tab, and the wording says "nothing you do is saved" rather than promising no editor. Explore, admin, login, data source and
+      plugin pages stay blocked
+- [x] **Welcome** (new, home dashboard): what this is, how to read it, one live panel, and a tile per dashboard
+- [x] **No issues** (the quiet dashboard, retitled): a short intro, then all five quiet marks side by side:
+      DVD logo, our logo (missing today), 3D text, flip clock, Boing ball
+- [x] Every public dashboard gets a one-line intro panel and the same links bar, so nobody is ever stranded
+- [x] Panel ids unchanged where the Makefile and e2e suite point at them; full option set kept on every panel
+
+**Verify**
+
+- [x] Whole stack in a throwaway copy on the server: `check.sh` green, plus new checks for `/demo/tv`, the
+      Welcome home and that the panel editor is refused
+- [x] Screenshots of the site, Welcome and No issues reviewed before anything is public
+
+### Review
+
+41/41 live checks on a throwaway copy of the stack on the server, 445/445 unit tests, typecheck and lint clean.
+Screenshots reviewed: site, Welcome, No issues, TV view, and an edit attempt. Still to do after the deploy: the
+YouTube ID for the launch video (`data-youtube` in `site/index.html`).

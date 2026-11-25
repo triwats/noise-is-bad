@@ -8,8 +8,44 @@
   "uid": "noise-is-bad-prometheus",
   "title": "noise is bad. real data",
   "description": "The same panel reading availability, good events over total events, which is what it expects out of the box. Break services by hand at http://localhost:9101.",
-  "links": [],
+  "links": [
+    {
+      "type": "dashboards",
+      "tags": [
+        "noise-is-bad-demo"
+      ],
+      "asDropdown": false,
+      "includeVars": false,
+      "keepTime": false,
+      "targetBlank": false,
+      "title": "noise is bad.",
+      "icon": "external link",
+      "tooltip": "",
+      "url": ""
+    }
+  ],
   "panels": [
+    {
+      "id": 100,
+      "type": "text",
+      "title": "",
+      "transparent": true,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 3
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "[← Welcome](d/noise-is-bad-welcome) · **The same panel on real data.** A pretend shop of seven services exports its availability to\nPrometheus, and the panel reads `demo_service_health` like any query. Open the menu on the panel and choose\n**Inspect → Query** to see exactly what it asks for.\n",
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        }
+      }
+    },
     {
       "type": "triwats-noiseisbad-panel",
       "id": 1,
@@ -18,7 +54,7 @@
         "h": 22,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "datasource": {
         "type": "prometheus",
@@ -56,7 +92,8 @@
   "refresh": "5s",
   "schemaVersion": 39,
   "tags": [
-    "noise-is-bad"
+    "noise-is-bad",
+    "noise-is-bad-demo"
   ],
   "templating": {
     "list": []

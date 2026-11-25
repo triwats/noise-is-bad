@@ -8,8 +8,44 @@
   "uid": "noise-is-bad-sloth",
   "title": "noise is bad. Sloth",
   "description": "Reading Sloth-shaped recording rules directly: budget left as a ratio, named from the sloth_service label. No legend format needed.",
-  "links": [],
+  "links": [
+    {
+      "type": "dashboards",
+      "tags": [
+        "noise-is-bad-demo"
+      ],
+      "asDropdown": false,
+      "includeVars": false,
+      "keepTime": false,
+      "targetBlank": false,
+      "title": "noise is bad.",
+      "icon": "external link",
+      "tooltip": "",
+      "url": ""
+    }
+  ],
   "panels": [
+    {
+      "id": 100,
+      "type": "text",
+      "title": "",
+      "transparent": true,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 3
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "[← Welcome](d/noise-is-bad-welcome) · **Sloth's recording rules, untouched.** The panel names services from the `sloth_service` label and reads\nerror budget remaining: below half is a warning, below a tenth is critical.\n",
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        }
+      }
+    },
     {
       "type": "triwats-noiseisbad-panel",
       "id": 1,
@@ -18,7 +54,7 @@
         "h": 22,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "datasource": {
         "type": "prometheus",
@@ -55,7 +91,8 @@
   "refresh": "5s",
   "schemaVersion": 39,
   "tags": [
-    "noise-is-bad"
+    "noise-is-bad",
+    "noise-is-bad-demo"
   ],
   "templating": {
     "list": []

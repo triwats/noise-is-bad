@@ -37,11 +37,17 @@ expect_status GET "$BASE/.built-from" 404 "the site's build stamp is hidden"
 
 # --- the demo works -----------------------------------------------------------
 expect_status GET "$G/api/health" 200 'Grafana is healthy'
-loc=$($CURL -o /dev/null -w '%{redirect_url}' "$G/")
+expect_body "$G/" 'Grafana' '/demo/ opens Grafana itself'
+expect_body "$G/api/dashboards/home" '"uid":"noise-is-bad-welcome"' 'the home dashboard is the Welcome page'
+loc=$($CURL -o /dev/null -w '%{redirect_url}' "$G/tv")
 case "$loc" in
-  *"/demo/d/$DASH/"*kiosk*) ok '/demo/ lands on the demo in kiosk mode' ;;
-  *) fail '/demo/ lands on the demo in kiosk mode' "redirects to '$loc'" ;;
+  *"/demo/d/$DASH/"*kiosk*) ok '/demo/tv is the demo, full screen' ;;
+  *) fail '/demo/tv is the demo, full screen' "redirects to '$loc'" ;;
 esac
+expect_body "$G/api/dashboards/uid/noise-is-bad-quiet" '"quietMark":"boing"' 'the No issues dashboard is provisioned'
+# Read-only: the dashboards say so to anyone looking, and saving is refused below.
+expect_body "$G/api/dashboards/uid/$DASH" '"canSave":false' 'a visitor cannot save a dashboard'
+expect_body "$G/api/dashboards/uid/$DASH" '"canEdit":false' 'a visitor cannot edit a dashboard'
 expect_body "$G/api/dashboards/uid/$DASH" '"type":"triwats-noiseisbad-panel"' 'the demo dashboard holds the panel'
 expect_body "$G/api/dashboards/uid/noise-is-bad-prometheus" '"type":"triwats-noiseisbad-panel"' 'the real data dashboard is provisioned'
 expect_body "$G/api/frontend/settings" '"triwats-noiseisbad-panel"' 'Grafana has loaded the plugin'

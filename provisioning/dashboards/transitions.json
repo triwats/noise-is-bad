@@ -8,8 +8,44 @@
   "uid": "noise-is-bad-transitions",
   "title": "noise is bad. transitions",
   "description": "The same scenario in all four appear-and-disappear styles, side by side. Chaos is used because services come and go every second or two, which is what you need to see in order to choose.",
-  "links": [],
+  "links": [
+    {
+      "type": "dashboards",
+      "tags": [
+        "noise-is-bad-demo"
+      ],
+      "asDropdown": false,
+      "includeVars": false,
+      "keepTime": false,
+      "targetBlank": false,
+      "title": "noise is bad.",
+      "icon": "external link",
+      "tooltip": "",
+      "url": ""
+    }
+  ],
   "panels": [
+    {
+      "id": 100,
+      "type": "text",
+      "title": "",
+      "transparent": true,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 3
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "[← Welcome](d/noise-is-bad-welcome) · **How boxes arrive and leave.** The same story four times over, one per transition style. Grow is the\ndefault; pick whichever reads best on your television.\n",
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        }
+      }
+    },
     {
       "type": "triwats-noiseisbad-panel",
       "id": 1,
@@ -18,7 +54,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "datasource": {
         "type": "grafana-testdata-datasource",
@@ -58,7 +94,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 3
       },
       "datasource": {
         "type": "grafana-testdata-datasource",
@@ -98,7 +134,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 12
       },
       "datasource": {
         "type": "grafana-testdata-datasource",
@@ -138,7 +174,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 12
       },
       "datasource": {
         "type": "grafana-testdata-datasource",
@@ -174,7 +210,8 @@
   "refresh": "",
   "schemaVersion": 39,
   "tags": [
-    "noise-is-bad"
+    "noise-is-bad",
+    "noise-is-bad-demo"
   ],
   "templating": {
     "list": []
