@@ -10,7 +10,7 @@
 <p>See what is wrong, and act.<br>
 Built specifically to work on TVs and utilise maximum space.</p>
 
-<p><a href="https://noiseisbad.triwats.com"><b>noiseisbad.triwats.com</b></a></p>
+<p><a href="https://noiseisbad.triwats.com/demo/"><b>Try the live demo</b></a> · <a href="docs/install.md"><b>Install it</b></a></p>
 
 <img alt="One panel through a shipping incident: shipping degrades, then checkout, the basket and orders follow it down, while the rest of the shop carries on" src="demo/recording/noise-is-bad.gif">
 
@@ -31,6 +31,12 @@ LASTING LONGER  →  its box grows and its colour strengthens
 FIXED           →  the box goes and the others take the space
 ALL FIXED       →  quiet again
 ```
+
+## Try it live
+
+**[The live demo](https://noiseisbad.triwats.com/demo/)** is real Grafana with the panel installed, watching a pretend online shop of seven services. It opens on a tour of every feature, each one running live: one problem, the split, the full board, recovery, the four ways boxes arrive and leave, every screensaver, and the same panel on real Prometheus data. Nothing you do there is saved, so poke at anything, and open **Inspect** on a panel to see its query and settings.
+
+**[`/demo/tv`](https://noiseisbad.triwats.com/demo/tv)** is the television view: the demo, full screen, nothing else. Put it on a screen of your own.
 
 ## Install
 

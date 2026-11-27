@@ -1,0 +1,985 @@
+{
+  "uid": "noise-is-bad-features",
+  "title": "noise is bad. features",
+  "description": "Start here: every feature of the panel, each one live.",
+  "tags": [
+    "noise-is-bad-demo"
+  ],
+  "links": [
+    {
+      "type": "dashboards",
+      "tags": [
+        "noise-is-bad-demo"
+      ],
+      "asDropdown": false,
+      "includeVars": false,
+      "keepTime": false,
+      "targetBlank": false,
+      "title": "noise is bad.",
+      "icon": "external link",
+      "tooltip": "",
+      "url": ""
+    }
+  ],
+  "editable": false,
+  "graphTooltip": 0,
+  "refresh": "",
+  "schemaVersion": 39,
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "",
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": []
+  },
+  "version": 1,
+  "panels": [
+    {
+      "id": 1,
+      "type": "text",
+      "title": "",
+      "transparent": true,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 5
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "# noise is bad.\n\nA Grafana panel for the office television that answers one question from across the room: **how bad are things\nright now?** Nothing healthy is ever drawn, so the screen gets noisier only as more things break. Everything below is\nthe same panel, live, each showing off one thing it does. This is real Grafana and nothing you do here is saved: open\na panel's menu (**⋮**) → **Inspect** to see its query and every setting.\n\nFull size: [Watch it break](d/a538aeff-5a8a-42a5-901c-938d896fdd6f) · [No issues](d/noise-is-bad-quiet) · [Real data](d/noise-is-bad-prometheus) · [Sloth](d/noise-is-bad-sloth) ·\n[Transitions](d/noise-is-bad-transitions) · **[Put it on a television →](tv)**\n",
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": "row",
+      "title": "The whole story",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "x": 0,
+        "y": 5,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 6,
+        "w": 24,
+        "h": 14
+      },
+      "id": 11,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "lifecycle",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "A shipping incident, on an 84-second loop",
+      "type": "triwats-noiseisbad-panel",
+      "description": "Quiet, one problem, the split, the board breaking up as the incident spreads, then recovery. Search, accounts and reviews never appear: nothing is wrong with them."
+    },
+    {
+      "id": 20,
+      "type": "row",
+      "title": "How bad is it? The more that is wrong, the noisier the screen",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "x": 0,
+        "y": 20,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 21,
+        "w": 8,
+        "h": 10
+      },
+      "id": 21,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "one-critical",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "One problem takes the whole screen",
+      "type": "triwats-noiseisbad-panel",
+      "description": "One critical service, alone. From across the room you see the colour before you read the name."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 21,
+        "w": 8,
+        "h": 10
+      },
+      "id": 22,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "two-problems",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "Two problems split it",
+      "type": "triwats-noiseisbad-panel",
+      "description": "The worse one gets more of the screen."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 21,
+        "w": 8,
+        "h": 10
+      },
+      "id": 23,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "major-incident",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "More: the worst gets the most room",
+      "type": "triwats-noiseisbad-panel",
+      "description": "The whole checkout path broken at once. Area is how bad, so the worst is biggest."
+    },
+    {
+      "id": 30,
+      "type": "row",
+      "title": "Over time",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "x": 0,
+        "y": 31,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 32,
+        "w": 8,
+        "h": 10
+      },
+      "id": 31,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "growing-incident",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "Getting worse, and pulling others in",
+      "type": "triwats-noiseisbad-panel",
+      "description": "A problem that escalates keeps its place and grows. The longer it lasts, the brighter it burns."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 32,
+        "w": 8,
+        "h": 10
+      },
+      "id": 32,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "recovery",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "Fixed, one by one",
+      "type": "triwats-noiseisbad-panel",
+      "description": "As each problem is fixed its box goes and the others take the space, until the screen is quiet."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 32,
+        "w": 8,
+        "h": 10
+      },
+      "id": 33,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "chaos",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "Flicking on and off, and the screen stays calm",
+      "type": "triwats-noiseisbad-panel",
+      "description": "A recovery has to hold for two checks before a box goes, so a flapping service does not make the screen flash."
+    },
+    {
+      "id": 40,
+      "type": "row",
+      "title": "Honest about what it can see",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "x": 0,
+        "y": 42,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 43,
+        "w": 12,
+        "h": 10
+      },
+      "id": 41,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "live",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "no_data_points"
+        }
+      ],
+      "title": "A broken query says so",
+      "type": "triwats-noiseisbad-panel",
+      "description": "A query that returns nothing readable is not a healthy estate, so the panel says it cannot see instead of going quiet."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 43,
+        "w": 12,
+        "h": 10
+      },
+      "id": 42,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "live",
+        "maxBoxes": 12
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          },
+          "refId": "A",
+          "scenarioId": "raw_frame",
+          "rawFrameContent": "[\n  {\n    \"columns\": [\n      {\n        \"text\": \"service\",\n        \"type\": \"string\"\n      },\n      {\n        \"text\": \"availability\",\n        \"type\": \"number\"\n      }\n    ],\n    \"rows\": [\n      [\n        \"shipping\",\n        0.8675\n      ],\n      [\n        \"checkout\",\n        0.87\n      ],\n      [\n        \"basket\",\n        0.8725\n      ],\n      [\n        \"orders\",\n        0.875\n      ],\n      [\n        \"search\",\n        0.8775\n      ],\n      [\n        \"accounts\",\n        0.88\n      ],\n      [\n        \"reviews\",\n        0.8825\n      ],\n      [\n        \"payments\",\n        0.885\n      ],\n      [\n        \"invoices\",\n        0.8875\n      ],\n      [\n        \"refunds\",\n        0.89\n      ],\n      [\n        \"pricing\",\n        0.8925\n      ],\n      [\n        \"catalog\",\n        0.895\n      ],\n      [\n        \"images\",\n        0.8975\n      ],\n      [\n        \"email\",\n        0.9\n      ],\n      [\n        \"sms\",\n        0.9025\n      ],\n      [\n        \"loyalty\",\n        0.905\n      ],\n      [\n        \"wishlist\",\n        0.9075\n      ],\n      [\n        \"returns\",\n        0.91\n      ],\n      [\n        \"tax\",\n        0.9125\n      ],\n      [\n        \"fraud\",\n        0.915\n      ],\n      [\n        \"ledger\",\n        0.9175\n      ],\n      [\n        \"gateway\",\n        0.92\n      ],\n      [\n        \"sessions\",\n        0.9225\n      ],\n      [\n        \"stock\",\n        0.925\n      ],\n      [\n        \"labels\",\n        0.9275\n      ],\n      [\n        \"tracking\",\n        0.93\n      ],\n      [\n        \"coupons\",\n        0.9325\n      ],\n      [\n        \"rewards\",\n        0.935\n      ],\n      [\n        \"feeds\",\n        0.9375\n      ],\n      [\n        \"alerts\",\n        0.94\n      ]\n    ]\n  }\n]"
+        }
+      ],
+      "title": "Thirty broken, twelve boxes at most",
+      "type": "triwats-noiseisbad-panel",
+      "description": "Past the ceiling the worst keep their own box and the rest share one saying how many more. Nothing is dropped silently."
+    },
+    {
+      "id": 50,
+      "type": "row",
+      "title": "Arriving and leaving: four styles, one setting",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "x": 0,
+        "y": 53,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "type": "triwats-noiseisbad-panel",
+      "id": 51,
+      "title": "Grow: takes the space and gives it back",
+      "gridPos": {
+        "x": 0,
+        "y": 54,
+        "w": 6,
+        "h": 9
+      },
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "chaos",
+        "maxBoxes": 20
+      },
+      "description": ""
+    },
+    {
+      "type": "triwats-noiseisbad-panel",
+      "id": 52,
+      "title": "Flash: burns bright when something new breaks",
+      "gridPos": {
+        "x": 6,
+        "y": 54,
+        "w": 6,
+        "h": 9
+      },
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "flash",
+        "demoScenario": "chaos",
+        "maxBoxes": 20
+      },
+      "description": ""
+    },
+    {
+      "type": "triwats-noiseisbad-panel",
+      "id": 53,
+      "title": "Fade: gentler, what it did before",
+      "gridPos": {
+        "x": 12,
+        "y": 54,
+        "w": 6,
+        "h": 9
+      },
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "fade",
+        "demoScenario": "chaos",
+        "maxBoxes": 20
+      },
+      "description": ""
+    },
+    {
+      "type": "triwats-noiseisbad-panel",
+      "id": 54,
+      "title": "None: nothing animates",
+      "gridPos": {
+        "x": 18,
+        "y": 54,
+        "w": 6,
+        "h": 9
+      },
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "none",
+        "demoScenario": "chaos",
+        "maxBoxes": 20
+      },
+      "description": ""
+    },
+    {
+      "id": 60,
+      "type": "row",
+      "title": "No issues: when nothing is wrong, a screensaver",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "x": 0,
+        "y": 63,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 64,
+        "w": 8,
+        "h": 10
+      },
+      "id": 61,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "all-quiet",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "The DVD logo, changing colour on every wall",
+      "type": "triwats-noiseisbad-panel",
+      "description": "The default. It changes colour on every wall, and one day someone will see it hit the corner."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 64,
+        "w": 8,
+        "h": 10
+      },
+      "id": 62,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "text",
+        "usePersistence": true,
+        "transitionMs": 500,
+        "transitionStyle": "grow",
+        "demoScenario": "all-quiet",
+        "maxBoxes": 20
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "Our own logo, calmer",
+      "type": "triwats-noiseisbad-panel",
+      "description": "The same drift, calmer, in the theme's colour."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 64,
+        "w": 8,
+        "h": 10
+      },
+      "id": 63,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "boing",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "all-quiet",
+        "maxBoxes": 20,
+        "spinText": "noise is bad."
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "The Boing ball",
+      "type": "triwats-noiseisbad-panel",
+      "description": "The 1984 Amiga demo. Built for the Raspberry Pi behind the television: nothing is repainted while it runs."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 74,
+        "w": 12,
+        "h": 11
+      },
+      "id": 64,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "3d",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "all-quiet",
+        "maxBoxes": 20,
+        "spinText": "noise is bad."
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "3D text, tumbling",
+      "type": "triwats-noiseisbad-panel",
+      "description": "The Windows XP 3D Text screensaver, rebuilt in CSS and tumbling forever. Readable every couple of minutes."
+    },
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 74,
+        "w": 12,
+        "h": 11
+      },
+      "id": 65,
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "flip",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "all-quiet",
+        "maxBoxes": 20,
+        "spinText": "noise is bad."
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "no_data_points",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "title": "Flip clock",
+      "type": "triwats-noiseisbad-panel",
+      "description": "The split-flap clock. Once a minute a leaf falls."
+    },
+    {
+      "id": 70,
+      "type": "row",
+      "title": "On real data",
+      "collapsed": false,
+      "panels": [],
+      "gridPos": {
+        "x": 0,
+        "y": 85,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "type": "triwats-noiseisbad-panel",
+      "id": 71,
+      "title": "Prometheus: a pretend shop of seven services",
+      "gridPos": {
+        "x": 0,
+        "y": 86,
+        "w": 12,
+        "h": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "noise-is-bad-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "noise-is-bad-prometheus"
+          },
+          "expr": "demo_availability_ratio",
+          "legendFormat": "{{service}}",
+          "range": true
+        }
+      ],
+      "options": {
+        "nameField": "",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.99,
+        "critical": 0.95,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "live",
+        "maxBoxes": 20
+      },
+      "description": "The panel reading demo_service_health from Prometheus, sized by error budget."
+    },
+    {
+      "type": "triwats-noiseisbad-panel",
+      "id": 72,
+      "title": "Sloth's recording rules, untouched",
+      "gridPos": {
+        "x": 12,
+        "y": 86,
+        "w": 12,
+        "h": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "noise-is-bad-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "noise-is-bad-prometheus"
+          },
+          "expr": "slo:period_error_budget_remaining:ratio",
+          "range": true
+        }
+      ],
+      "options": {
+        "nameField": "sloth_service",
+        "valueField": "",
+        "reducer": "last",
+        "direction": "lower-is-worse",
+        "warning": 0.5,
+        "critical": 0.1,
+        "quietMode": true,
+        "quietMark": "dvd",
+        "usePersistence": true,
+        "transitionMs": 600,
+        "transitionStyle": "grow",
+        "demoScenario": "live",
+        "maxBoxes": 20
+      },
+      "description": "Named by the sloth_service label, reading error budget remaining. No legend format needed."
+    }
+  ]
+}

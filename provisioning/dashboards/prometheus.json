@@ -38,7 +38,7 @@
       },
       "options": {
         "mode": "markdown",
-        "content": "[← Welcome](d/noise-is-bad-welcome) · **The same panel on real data.** A pretend shop of seven services exports its availability to\nPrometheus, and the panel reads `demo_service_health` like any query. Open the menu on the panel and choose\n**Inspect → Query** to see exactly what it asks for.\n",
+        "content": "[← All features](d/noise-is-bad-features) · **The same panel on real data.** A pretend shop of seven services exports its availability to\nPrometheus, and the panel reads `demo_service_health` like any query. Open the menu on the panel and choose\n**Inspect → Query** to see exactly what it asks for.\n",
         "code": {
           "language": "plaintext",
           "showLineNumbers": false,

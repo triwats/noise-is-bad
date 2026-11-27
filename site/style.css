@@ -52,6 +52,11 @@ body {
     sans-serif;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 a {
   color: inherit;
   text-underline-offset: 0.2em;
@@ -113,8 +118,8 @@ h2 {
 }
 
 h1 {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  max-width: 12ch;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  max-width: 20ch;
 }
 
 h2 {
@@ -141,9 +146,63 @@ p {
   max-width: 42rem;
 }
 
-.small {
-  font-size: 0.85rem;
+/* The README is written for GitHub, which centres with the old align attribute. */
+[align='center'] {
+  text-align: center;
+}
+
+blockquote {
+  margin: 24px 0;
+  font-size: 1.4rem;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/* The README's mermaid pipeline, drawn by site/render.cjs as boxes in a row. */
+.pipeline,
+.pipeline ol {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+  display: flex;
+  gap: 12px;
+}
+
+.pipeline li {
+  flex: 1;
+  padding: 14px 16px;
+  background: var(--panel);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.pipeline .group {
+  padding: 8px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.pipeline .group:last-child {
+  flex-grow: 3;
+}
+
+.pipeline .group ol {
+  margin: 0;
+  flex: 1;
+}
+
+.group-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--muted);
+  padding: 4px 8px 10px;
 }
 
 .screen {
@@ -174,22 +233,6 @@ p {
     0 24px 48px -24px rgb(0 0 0 / 0.6);
 }
 
-.tour {
-  padding-left: 1.2rem;
-  max-width: 42rem;
-}
-
-.tour li {
-  margin: 6px 0;
-}
-
-.screen figcaption {
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: var(--muted);
-  max-width: 42rem;
-}
-
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -211,51 +254,6 @@ p {
   background: transparent;
   color: var(--fg);
   box-shadow: inset 0 0 0 2px var(--fg);
-}
-
-.ladder {
-  list-style: none;
-  padding: 0;
-  margin: 24px 0 0;
-  display: grid;
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-}
-
-.ladder li {
-  display: grid;
-  grid-template-columns: 11rem 1fr;
-  gap: 1rem;
-  padding: 14px 16px;
-  background: var(--bg);
-}
-
-.state {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 0.9rem;
-  padding-top: 0.15em;
-}
-
-.state.warn {
-  color: var(--warn);
-}
-
-.state.crit {
-  color: var(--crit);
-}
-
-.split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.split .screen {
-  margin: 0;
 }
 
 .table {
@@ -318,12 +316,8 @@ footer {
     font-size: 0.95rem;
   }
 
-  .split {
-    grid-template-columns: 1fr;
-  }
-
-  .ladder li {
-    grid-template-columns: 1fr;
-    gap: 2px;
+  .pipeline,
+  .pipeline .group ol {
+    flex-direction: column;
   }
 }

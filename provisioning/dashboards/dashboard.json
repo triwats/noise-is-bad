@@ -50,7 +50,7 @@
       },
       "options": {
         "mode": "markdown",
-        "content": "[← Welcome](d/noise-is-bad-welcome) · **A shipping incident, on an 84-second loop.** Quiet, then one problem takes the whole screen, then the\nboard breaks up as checkout, the basket and orders follow shipping down, then it recovers. Search, accounts and\nreviews never appear: nothing is wrong with them.\n",
+        "content": "[← All features](d/noise-is-bad-features) · **A shipping incident, on an 84-second loop.** Quiet, then one problem takes the whole screen, then the\nboard breaks up as checkout, the basket and orders follow shipping down, then it recovers. Search, accounts and\nreviews never appear: nothing is wrong with them.\n",
         "code": {
           "language": "plaintext",
           "showLineNumbers": false,

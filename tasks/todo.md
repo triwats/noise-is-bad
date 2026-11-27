@@ -986,3 +986,22 @@ walks into a real, read-only Grafana that welcomes them and shows the product of
 41/41 live checks on a throwaway copy of the stack on the server, 445/445 unit tests, typecheck and lint clean.
 Screenshots reviewed: site, Welcome, No issues, TV view, and an edit attempt. Still to do after the deploy: the
 YouTube ID for the launch video (`data-youtube` in `site/index.html`).
+
+## The site is the README; the demo is a features tour
+
+Decided: the site at noiseisbad.triwats.com is built from README.md, so the two can never disagree; `/demo/` opens on a features tour that replaces Welcome.
+
+- [x] `site/render.cjs`: README.md → HTML with `marked` (already in node_modules; installed in the site image). Repo links → GitHub, the site's own links → relative, GIFs → video, the launch video in place of the top GIF, the mermaid pipeline drawn as boxes, headings get ids, tables scroll.
+- [x] The build fails if any relative link or image on the page points at nothing.
+- [x] `site/index.html` becomes the frame: head, nav, footer, scripts, and one placeholder.
+- [x] README: link the live demo at the top, and a short "See it live" section.
+- [x] `features.json` (uid `noise-is-bad-features`) replaces `welcome.json`: one section per feature, each a live panel copied from an existing dashboard so it carries the full option set.
+- [x] Home dashboard, compose mounts, intros' back link, check.sh, CLAUDE.md.
+- [x] Verify: `make site` locally, unit checks, a throwaway server stack with check.sh, screenshots.
+
+### Review
+
+- The site is README.md rendered by `site/render.cjs` (marked 16.3.0, the version the lockfile already resolves, installed into the site image because that container has no network). The build fails on any dead link, missing image, unknown anchor or repository file that does not exist; tried with a deliberately broken README.
+- Encoded clips are cached in the site volume's `.cache`, keyed by the GIF, so a README change rebuilds in 0.2s instead of minutes. Caddy hides it; check.sh proves that.
+- `/demo/` opens `noise is bad. features`: 28 panels in eight sections, every one live. Screenshot reviewed at full height: story, one problem, the split, the full board, escalation, recovery, flapping, unreadable, the ceiling with "+19 more", four transitions, five screensavers, Prometheus, Sloth.
+- Verified on a throwaway copy of the stack on the server: 44 of 44 checks, then removed. Unit tests 445 pass. Docker on the Mac was not responding, so the local stack was not used.

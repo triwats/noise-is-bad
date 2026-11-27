@@ -31,14 +31,17 @@ expect_body() {
 
 # --- the site ---------------------------------------------------------------
 expect_body "$BASE/" 'noise is bad.' 'the site is served at the root'
+expect_body "$BASE/" 'id="how-it-is-put-together"' 'the site is the README'
 expect_status GET "$BASE/style.css" 200 'the site stylesheet is served'
 expect_status GET "$BASE/media/logo.svg" 200 'the site media is served'
 expect_status GET "$BASE/.built-from" 404 "the site's build stamp is hidden"
+expect_status GET "$BASE/media/sponsor.gif" 200 "the README's images are served"
+expect_status GET "$BASE/.cache/" 404 "the clip cache is hidden"
 
 # --- the demo works -----------------------------------------------------------
 expect_status GET "$G/api/health" 200 'Grafana is healthy'
 expect_body "$G/" 'Grafana' '/demo/ opens Grafana itself'
-expect_body "$G/api/dashboards/home" '"uid":"noise-is-bad-welcome"' 'the home dashboard is the Welcome page'
+expect_body "$G/api/dashboards/home" '"uid":"noise-is-bad-features"' 'the home dashboard is the features tour'
 loc=$($CURL -o /dev/null -w '%{redirect_url}' "$G/tv")
 case "$loc" in
   *"/demo/d/$DASH/"*kiosk*) ok '/demo/tv is the demo, full screen' ;;

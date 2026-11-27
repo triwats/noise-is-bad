@@ -38,7 +38,7 @@
       },
       "options": {
         "mode": "markdown",
-        "content": "[← Welcome](d/noise-is-bad-welcome) · **Sloth's recording rules, untouched.** The panel names services from the `sloth_service` label and reads\nerror budget remaining: below half is a warning, below a tenth is critical.\n",
+        "content": "[← All features](d/noise-is-bad-features) · **Sloth's recording rules, untouched.** The panel names services from the `sloth_service` label and reads\nerror budget remaining: below half is a warning, below a tenth is critical.\n",
         "code": {
           "language": "plaintext",
           "showLineNumbers": false,

@@ -2,8 +2,9 @@
 # Builds the project site into the shared volume Caddy serves at /. Runs in the
 # throwaway `site` container (see compose.yaml) before Caddy starts.
 #
-# Re-encoding the demo clips takes minutes on a small server, so this skips the
-# build when nothing the site is made from has changed since the last one.
+# Skips the build when nothing the site is made from has changed since the last
+# one. When something has, site/build.sh still reuses the encoded clips unless
+# the recordings themselves changed, which is the part that takes minutes.
 set -euo pipefail
 
 repo=/repo
@@ -12,7 +13,9 @@ stamp="$out/.built-from"
 
 # Everything site/build.sh reads.
 inputs=(
+  README.md
   site
+  docs/brand/sponsor.gif
   docs/brand/lockup-light.svg
   docs/brand/lockup-dark.svg
   src/img/logo.svg
